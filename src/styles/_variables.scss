@@ -1,0 +1,32 @@
+$primary: #0096d6;
+
+@mixin custom-scroll-bar() {
+  &::-webkit-scrollbar {
+    border-radius: 10px;
+    height: 10px;
+    width: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $light;
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+}
+
+$roboto-font-path: "/static/fonts/Roboto/";
+$img-path: "/static/img/";
+// Roboto
+@font-face {
+  src: url("#{$roboto-font-path}Roboto-Regular.ttf");
+  font-family: "Roboto";
+}
+@font-face {
+  src: url("#{$roboto-font-path}Roboto-Bold.ttf");
+  font-family: "Roboto-Bold";
+}
+@font-face {
+  src: url("#{$roboto-font-path}Roboto-Medium.ttf");
+  font-family: "Roboto-Medium";
+}
