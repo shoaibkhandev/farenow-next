@@ -771,3 +771,247 @@ label {
 .date-picker-section {
     display: contents;
 }
+
+// footer 
+
+footer {
+  background: #203054;
+  padding: 10px 0 0;
+  position: relative;
+  border-top: 1px solid #CAD6E3;
+}
+
+footer .nav-top {
+  border-bottom: 1px solid rgba(77, 111, 147, .18);
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: .4rem;
+}
+
+footer .nav-top li a {
+  color: #fff;
+  font-size: 14px;
+  transition: all .5s ease 0s;
+}
+
+footer .nav-top li a:hover {
+  color: #fec524;
+}
+
+footer .nav-top li a .bi-envelope {
+  transition: all .5s ease 0s;
+}
+
+footer .nav-top li a:hover .bi-envelope {
+  fill: #fec524 !important;
+}
+
+footer .nav-top .btn-browse {
+  text-align: center;
+}
+
+footer .nav-top .btn-browse a {
+  border: 1px solid rgba(77, 111, 147, .43);
+  display: inline-block;
+  font-size: 13px;
+  padding: 6px 10px;
+  transition: all .5s ease 0s;
+}
+
+footer .nav-top .btn-browse a:hover {
+  border: 1px solid #fec524;
+  color: #203152;
+  background: #fec524;
+}
+
+footer .nav-top li {
+  width: 33%;
+}
+
+footer .nav-top .social-icons {
+  text-align: right;
+}
+
+footer .nav-top .social-icons a {
+  width: 30px;
+  height: 30px;
+  transition: all .6s ease;
+  display: inline-block;
+  text-align: center;
+  border-radius: 50%;
+  background: #CAD6E3;
+  margin-right: 5px;
+  line-height: 26px;
+}
+
+footer .nav-top .social-icons a .unicon {
+
+  fill: #203152;
+}
+
+footer .nav-top .social-icons a:hover {
+  border-radius: 3px;
+}
+
+footer .nav-top .social-icons a:hover .unicon {
+  fill: #fff;
+}
+
+footer .nav-top .social-icons a.facebook-i:hover {
+  background: #203152;
+}
+
+footer .nav-top .social-icons a.twitter-i:hover {
+  background: #09adeb;
+}
+
+footer .nav-top .social-icons a.linkedin-i:hover {
+  background: #007ab9;
+}
+
+footer .nav-top .social-icons a.instagram-i:hover {
+  background: #3e6d97;
+}
+
+footer .nav-top .social-icons a.youtube-i:hover {
+  background: #F4675F;
+}
+
+footer .footer-middle {
+  padding-bottom: 2rem;
+}
+
+footer .footer-middle li a.btn-custom {
+  display: inline-block;
+  padding: 7px 15px;
+  border-radius: 3px;
+  border: 1px solid #7799BE;
+  margin: 0 10px 15px 0;
+  color: #d4e2ef;
+  transition: all .5s ease;
+  text-transform: capitalize;
+  font-size: 14px;
+}
+
+footer .footer-middle li a:hover {
+  background: #FEC524;
+  color: #203152;
+  border: 1px solid #ffdb74;
+}
+
+footer .footer-middle .mobile-app h5 {
+  margin-bottom: 10px;
+  color: #FEC524;
+  font-size: 18px;
+}
+
+footer .footer-middle .mobile-app span {
+  color: rgba(255, 255, 255, .8);
+  display: block;
+  font-size: 12px;
+  line-height: 24px;
+}
+
+footer .footer-middle .mobile-app a {
+  background-image: url(../../public/static/img/mobile-app-download.png);
+  background-repeat: no-repeat;
+  background-size: 230% auto;
+  height: 40px;
+  display: inline-block;
+  margin-top: 10px;
+  opacity: .7;
+  margin-right: 15px;
+  transition: all .2s ease;
+}
+
+footer .footer-middle .mobile-app a.ios {
+  background-position: 0 0;
+  width: 130px;
+}
+
+footer .footer-middle .mobile-app a.andriod {
+  background-position: -167px 0;
+  background-size: 217% auto;
+  width: 140px;
+}
+
+footer .footer-middle .mobile-app a:hover {
+  opacity: 1;
+}
+
+.footer-bottom ul li a {
+  display: inline-block;
+  font-size: 13px;
+  color: #7799BE;
+  transition: all .8s ease;
+  padding-left: 8px;
+  padding-right: 8;
+}
+
+.footer-bottom {
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(77, 111, 147, .18);
+  min-height: 50px;
+
+}
+
+.footer-bottom ul.copy-right {
+  justify-content: flex-end;
+}
+
+.footer-bottom ul li {
+  font-size: 13px;
+  color: #7799BE;
+
+}
+
+.footer-bottom ul li a:first-child {
+  padding-left: 0;
+}
+
+.footer-bottom ul li:last-of-type a {
+  padding-right: 0;
+}
+
+@media (min-width: 1200px) {
+  .container {
+      max-width: 1200px;
+  }
+}
+
+@media screen and (max-width:992px) {
+  footer .nav-top li {
+      width: 100%;
+  }
+
+  footer .nav-top li:nth-child(1) {
+      width: 50%;
+  }
+
+  footer .nav-top li:nth-child(2) {
+      width: 50%;
+  }
+
+  footer .nav-top .social-icons {
+      text-align: center;
+      margin-top: 15px;
+
+  }
+
+}
+
+@media screen and (max-width:768px) {
+  .footer-middle ul {
+      justify-content: center;
+  }
+
+  .footer-middle .mobile-app {
+      text-align: center;
+  }
+
+  footer .footer-middle .mobile-app a.andriod {
+      margin-right: 0;
+  }
+}
