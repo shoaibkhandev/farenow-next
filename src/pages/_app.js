@@ -7,6 +7,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import "@styles/globals.scss";
 import { GlobleStyles } from "../theme/globleStyles";
 import Noop from '@components/layout/Layout'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 

@@ -25,3 +25,749 @@
     top: 0;
     z-index: -1;
 }
+
+// testing
+.holidays {
+    margin-top: 100px;
+    padding-bottom: 50px;
+    border-bottom: 2px solid #f4f4f9;
+  }
+  
+  .holidays .section-title {
+    margin-bottom: 40px;
+  }
+  
+  .holidays .section-title h2 {
+    font-family: "Roboto Bold";
+    font-size: 36px;
+  }
+  
+  .holidays .section-title p {
+    color: #4d6f93;
+    display: block;
+    font-size: 24px;
+    line-height: 48px;
+    font-weight: 400;
+    font-family: "Roboto";
+  }
+  
+  .holiday-item {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    border-radius: 5px;
+    margin-bottom: 15px;
+  }
+  
+  .holiday-item .overly {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(32, 49, 82, 0.72);
+    transition: all 0.8s;
+    opacity: 0.5;
+    z-index: 2;
+  }
+  
+  .holiday-item button {
+    font-size: 12px;
+    line-height: 12px;
+    min-width: 80px;
+    padding: 10px;
+    color: #fff;
+    box-shadow: inset 0 0 0 1px #fff;
+    font-weight: 400;
+    text-transform: uppercase;
+    border: none;
+    background: transparent;
+  }
+  
+  .holiday-item button:hover {
+    background: #4093fb !important;
+    color: #fff !important;
+  }
+  
+  .holiday-item .middle-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    width: 100%;
+    transition: all 0.7s;
+    opacity: 0;
+  }
+  
+  .holiday-item .middle-text h5 {
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: 700;
+  }
+  
+  .holiday-item .text-bottom {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    z-index: 3;
+    transition: all 0.3s;
+  }
+  
+  .holiday-item .text-bottom span {
+    color: #fff;
+    margin: 0 0 5px;
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 400;
+  }
+  
+  .holiday-item:hover .middle-text {
+    opacity: 1;
+  }
+  
+  .holiday-item:hover .text-bottom {
+    bottom: -100%;
+  }
+  
+  .holiday-item img {
+    transition: all 0.7s;
+    min-height: 360px;
+    object-fit: cover;
+    object-position: top;
+  }
+  
+  .holiday-item:hover img {
+    transform: scale(1.1);
+  }
+  
+  .holiday-item:hover .overly {
+    opacity: 1;
+  }
+
+  .vaction-in-london {
+    margin-top: 70px;
+    border-bottom: 2px solid #f4f4f9;
+    padding-bottom: 70px;
+  }
+  
+  .vaction-wrapper {
+    box-shadow: 0 0 5px #cad6e3;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .vaction-right {
+    font-size: 22px;
+    line-height: normal;
+    color: #4d6f93;
+    background: #fff;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+  }
+  
+  .vaction-right h1 {
+    font-size: 30px;
+    color: #203152;
+    font-family: "Roboto Bold";
+  }
+  
+  .vaction-right p {
+    font-size: 16px;
+    margin: 10px auto;
+    width: 300px;
+    line-height: 26px;
+  }
+  
+  .vaction-right button {
+    padding: 14px;
+    font-size: 16px;
+    line-height: 16px;
+    text-transform: uppercase;
+    font-family: "Roboto Medium";
+  }
+  .booknow{
+         padding: 14px;
+        font-size: 16px;
+        line-height: 16px;
+        text-transform: uppercase;
+        font-family: "Roboto Medium";
+        background-color: #15427a!important;
+    border-color: #15427a!important;
+    border-radius: 3px;
+
+  }
+
+  .our-app {
+    color: #fff;
+    position: relative;
+    background-size: 100%;
+    min-height: 240px;
+    background: rgba(67, 129, 205, 1);
+    background: -moz-linear-gradient(
+      -45deg,
+      rgba(67, 129, 205, 1) 0,
+      rgba(25, 77, 145, 1) 100%
+    );
+    background: -webkit-gradient(
+      left top,
+      right bottom,
+      color-stop(0, rgba(67, 129, 205, 1)),
+      color-stop(100%, rgba(25, 77, 145, 1))
+    );
+    background: -webkit-linear-gradient(
+      -45deg,
+      rgba(67, 129, 205, 1) 0,
+      rgba(25, 77, 145, 1) 100%
+    );
+    background: -o-linear-gradient(
+      -45deg,
+      rgba(67, 129, 205, 1) 0,
+      rgba(25, 77, 145, 1) 100%
+    );
+    background: -ms-linear-gradient(
+      -45deg,
+      rgba(67, 129, 205, 1) 0,
+      rgba(25, 77, 145, 1) 100%
+    );
+    background: linear-gradient(
+      135deg,
+      rgba(67, 129, 205, 1) 0,
+      rgba(25, 77, 145, 1) 100%
+    );
+    border-radius: 5px;
+    margin-bottom: 70px;
+    margin-top: 70px;
+    overflow: hidden;
+    padding: 0 15px;
+  }
+  
+  .app-right {
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .app-right h3 {
+    font-size: 24px;
+    font-family: "Roboto Medium";
+  }
+  
+  .app-right h6 {
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+  
+  .our-app::before {
+    content: "";
+    background: url("../../public/static/img/mAppImg.v12345.d5b8fec.png") no-repeat;
+    width: 536px;
+    height: 240px;
+    position: absolute;
+    top: 0px;
+    left: 20px;
+  }
+  
+  .btn-app {
+    border-radius: 6px;
+    padding: 6px 10px;
+    background: #fff;
+    width: 168px;
+    transition: all 0.1s linear;
+    position: relative;
+    top: 0;
+    box-shadow: 0 2px 0 #203152;
+    display: block;
+    float: left;
+  }
+  
+  .btn-app::before {
+    content: "";
+    height: 44px;
+    width: 100%;
+    background: url("../../public/static/img/appBtnSprite.v12345.b9a4254.png") no-repeat;
+    background-size: 320px;
+    display: inline-block;
+  }
+  
+  .btn-app.andriod {
+    margin-right: 20px;
+  }
+  
+  .btn-app.andriod::before {
+    background-position: -144px -63px;
+  }
+  
+  .btn-app.ios::before {
+    background-position: -144px -5px;
+  }
+
+  .essantial {
+    padding-top: 70px;
+    padding-bottom: 70px;
+    border-top: 1px solid #cad6e3;
+  }
+  
+  .essantial ul {
+    justify-content: space-between;
+    display: flex;
+    list-style: none;
+  }
+  
+  .essantial ul li {
+    position: relative;
+    padding-left: 65px;
+    padding-top: 0;
+    color: #203152;
+    width: 33%;
+  }
+  
+  .essantial ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 55px;
+    width: 55px;
+    background-size: 500px;
+    background-image: url("../../public/static/img/sprite.v12346.f12e9ef.png");
+    background-repeat: no-repeat;
+  }
+  
+  .essantial ul li.easy-fast::before {
+    background-position: -297px -192px;
+  }
+  
+  .essantial ul li.multi-payment::before {
+    background-position: -312px -159px;
+    background-size: 421px;
+  }
+  
+  .essantial ul li.support::before {
+    background-position: -442px -192px;
+  }
+  
+  .essantial ul li h4 {
+    font-family: "Roboto Medium";
+    font-size: 20px;
+    margin-bottom: 0;
+  }
+  
+  .essantial ul li p {
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+  
+
+
+  @media screen and (max-width: 992px) {
+    .our-app::before {
+      display: none;
+    }
+  
+    .essantial ul li {
+      width: 100%;
+      margin-bottom: 30px;
+    }
+    .essantial ul {
+     
+        display: block;
+        
+      }
+  }
+  @media screen and (max-width: 576px) and (min-width: 200px) {
+    .app-right div {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .app-right {
+      align-items: center;
+      padding-bottom: 20px;
+      padding-top: 20px;
+    }
+  
+    .app-right h3 {
+      text-align: center;
+    }
+  
+    .app-right h6 {
+      text-align: center;
+    }
+  
+    .btn-app {
+      width: 190px;
+      margin-right: 0 !important;
+      margin-bottom: 15px;
+    }
+  }
+
+  .top-list-sec {
+    background: #f3f5fd;
+    padding: 50px 0;
+    position: relative;
+  }
+  
+  .top-list-sec .title {
+    color: #203152;
+    font-size: 18px;
+    font-family: "Roboto Bold";
+    padding-bottom: 20px;
+  }
+  
+  .top-list-sec ul li a {
+    padding: 7px 0 7px 20px;
+    position: relative;
+    color: #4d6f93;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+  }
+  
+  .top-list-sec ul li a::before {
+    background: #203152;
+    border-radius: 5px;
+    content: "";
+    display: block;
+    height: 5px;
+    left: 3px;
+    position: absolute;
+    top: 16px;
+    width: 5px;
+  }
+  
+  .top-list-sec .top-des {
+    position: relative;
+  }
+  
+  .top-list-sec .top-des::after {
+    content: "";
+    top: 11px;
+    width: 1px;
+    height: 95%;
+    position: absolute;
+    right: 55px;
+    background: #cad6e3;
+    display: block;
+  }
+  
+  .top-list-sec ul li a:hover::before {
+    background: #fec524;
+  }
+  .search-wrapper {
+    background: rgba(32, 49, 82, 0.84);
+    position: relative;
+    width: 100%;
+    min-height: 200px;
+  }
+  
+  .section-header ul li a {
+    color: #fff;
+    font-family: "Roboto Regular";
+    font-size: 22px;
+    position: relative;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+   .section-header ul li a::after {
+    content: "";
+    position: absolute;
+    height: 3px;
+    width: 0;
+    transition: width 0.5s ease-out 0s;
+    background: #fec524;
+    left: 0;
+    bottom: -3px;
+  }
+  
+  .section-header ul li a.active {
+    color: #fec524 !important;
+  }
+  
+  .section-header ul li a.active::after {
+    width: 100%;
+  }
+  
+   .section-header ul li a.active .unicon svg {
+    fill: #fec524 !important;
+  }
+  .banner .search-wrapper .section-header {
+    background: rgba(32, 49, 82, 0.63);
+    position: relative;
+    padding: 5px 0;
+    height: 50px;
+  }
+  .inner-wrapper {
+    padding: 25px 0;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .top-list-sec ul {
+      flex-direction: row !important;
+    }
+  
+    .top-list-sec ul li {
+      width: 33%;
+    }
+  }
+  
+  @media screen and (max-width: 576px) and (min-width: 200px) {
+    .top-list-sec ul li {
+      width: 50%;
+    }
+  }
+  
+  @media screen and (max-width: 992px) {
+    .top-list-sec .top-des::after {
+      display: none;
+    }
+  }
+
+  // flight seacrh
+
+  .fade-enter {
+    opacity: 0;
+}
+
+.fade-enter-active {
+    transition: opacity .5s;
+}
+
+.fade-leave {
+    /* opacity: 1;*/
+}
+
+.fade-leave-active {
+    transition: opacity .5s;
+    opacity: 0;
+}
+
+#flight-search {
+    font-family: 'Roboto Regular';
+    font-size: 14px;
+
+}
+
+.select-flight .bv-no-focus-ring {
+    display: flex;
+}
+
+.select-flight .bv-no-focus-ring .custom-control .custom-control-label {
+    color: #fff;
+    letter-spacing: -.5px;
+}
+
+.search-items label {
+    color: #fff;
+}
+
+.search-items {
+    position: relative;
+    width: 20.7%;
+
+}
+
+.search-items.leaving {
+    padding-right: 20px !important;
+}
+
+.search-items .form-control {
+    border: 3px solid #fff;
+    transition: all .2s;
+    padding-left: 36px;
+    padding-right: 20px;
+    height: 44px;
+    font-size: 14px;
+}
+
+.search-items .form-control[readonly=readonly] {
+    cursor: pointer;
+}
+
+.search-items.pick-date,
+.search-items.search-button {
+    width: 13%;
+}
+
+.search-items.search-button {
+    width: 10%;
+}
+
+.form-control:focus {
+    border-color: #fec524 !important;
+}
+
+.custom-select:focus {
+    box-shadow: none;
+    border-color: #194e91;
+}
+
+.search-items .unicon {
+    position: absolute;
+    top: calc(50% + 15px);
+    transform: translateY(-50%);
+    left: 15px;
+}
+
+.search-items .unicon.exchange {
+    left: auto;
+    right: -2px;
+    cursor: pointer;
+    transition: all .3s;
+    top: 3rem;
+    transform: translateY(0);
+    fill: #fff
+}
+
+.search-items .unicon.angle-down {
+    left: auto;
+    right: 10px
+}
+
+.search-items .unicon.exchange.active {
+    transform-origin: center;
+    transform: rotate(180deg)
+}
+
+.search-items .traveller {
+    height: 44px;
+    background: #fff;
+    border-radius: 0.25rem;
+}
+
+.inner-wrapper button {
+    height: 44px;
+    font-family: 'Roboto Medium';
+    padding: 0 20px;
+    text-transform: uppercase;
+}
+
+.search-items .traveller-dropdown {
+    width: 350px;
+    position: absolute;
+    top: 95px;
+    right: 0;
+    background-color: #fff;
+    border-radius: 2px;
+    border: 1px solid #CAD6E3;
+    z-index: 3;
+}
+
+.search-items .traveller-dropdown::before {
+    border-color: transparent transparent #CAD6E3;
+    border-style: solid;
+    border-width: 10px;
+    top: -21px;
+    content: "";
+    height: 0;
+    left: 50%;
+    margin-left: -10px;
+    position: absolute;
+    width: 0;
+}
+
+.search-items .traveller-dropdown::after {
+    border-color: transparent transparent #fff;
+    border-style: solid;
+    border-width: 12px;
+    top: -22px;
+    content: "";
+    height: 0;
+    left: 50%;
+    margin-left: -12px;
+    position: absolute;
+    width: 0;
+    z-index: 1;
+}
+
+.search-items .traveller-dropdown .select-traveller span {
+    color: #7799BE;
+}
+
+.search-items .traveller-dropdown .traveller-bottom {
+    text-align: right;
+    border-top: 1px solid #CAD6E3;
+    background: #F7F8FC;
+}
+
+.search-items .traveller-dropdown .traveller-bottom button {
+    font-size: 12px;
+    padding: 10px;
+    background-color: #194e91;
+    line-height: 12px;
+    min-width: 80px;
+    height: auto;
+}
+
+.multi-city-wrapper button {
+    font-size: 12px;
+    color: #21aa29 !important;
+    padding: 8px 14px;
+    padding-right: 18px;
+    height: auto;
+    text-transform: capitalize;
+
+}
+
+.tooltip-inner {
+    padding: 15px;
+}
+
+.custom-control-label {
+    color: #fff;
+    padding-left: 15px;
+}
+label {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+@media screen and (max-width: 992px) {
+    .search-items {
+        width: 100%;
+    }
+
+    .search-items .unicon.exchange {
+        display: none;
+    }
+
+    .search-items.pick-date {
+        width: 100%;
+    }
+
+    .search-items.search-button {
+        width: 100%;
+    }
+
+    .search-items.search-button label {
+        width: 100%
+    }
+
+    .search-items.leaving {
+        padding-right: 0 !important;
+    }
+}
+
+@media screen and (max-width: 768px) and (min-width:200px) {
+    .search-items.search-button button {
+        width: 100%
+    }
+
+    .search-items .traveller-dropdown {
+        width: 100%;
+    }
+}
+
+.date-picker-section {
+    display: contents;
+}

@@ -22,6 +22,7 @@ import {
     Paper,
     Popper,
 } from '@mui/material';
+import Logo from '../../../public/static/img/flyinLogo-white.png'
 //Icons
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
@@ -31,6 +32,10 @@ import { useTheme } from '@mui/material/styles';
 import navconfig from './config';
 import SigninModal from './signinModal';
 import BookingModal from './bookingModal';
+import Image from 'next/image';
+// drawer 
+import Drawerpage from './drawer'
+
 
 export default function ButtonAppBar() {
     const theme = useTheme();
@@ -52,6 +57,8 @@ export default function ButtonAppBar() {
         <React.Fragment>
             <AppBar position="absolute" color="transparent">
                 <Toolbar>
+                <Image  src={Logo} width={70} height={30}  />
+                <Hidden mdDown >
                     <List sx={{ display: 'flex', alignItems: 'center' }}>
                         {leftside?.map((item, index) => (
                             <ListItem disablePadding key={`navleft-${index}`} sx={{ width: 'auto' }}>
@@ -115,6 +122,12 @@ export default function ButtonAppBar() {
                             <BookingModal />
                         </ListItem>
                     </List>
+                    </Hidden>
+                    <Hidden mdUp >
+                        <Box sx={{marginLeft:"auto"}} >
+                    <Drawerpage/>
+                    </Box>
+                    </Hidden>
                 </Toolbar>
             </AppBar>
         </React.Fragment>
