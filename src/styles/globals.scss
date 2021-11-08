@@ -4,7 +4,7 @@
     background-position: center top;
     background-attachment: fixed;
     background-repeat: no-repeat;
-    background-size: 100% auto;
+    background-size: cover;
     position: relative;
     z-index: 1;
 }
@@ -648,8 +648,8 @@
 .inner-wrapper button {
     height: 44px;
     font-family: 'Roboto Medium';
-    padding: 0 20px;
     text-transform: uppercase;
+    padding-top:10px;
 }
 
 .search-items .traveller-dropdown {
@@ -771,3 +771,534 @@ label {
 .date-picker-section {
     display: contents;
 }
+
+//  sign in 
+
+
+.sign-in-modal .section-heading h2 {
+  color: #fff;
+  font-size: 28px;
+  font-family: 'Roboto Bold';
+}
+
+.sign-in-modal .section-heading span {
+  color: #fff;
+  display: block;
+  font-size: 22px;
+  font-family: 'Roboto Regular';
+}
+
+.sign-in-modal .list-group .list-group-item {
+  background-color: transparent;
+  border: 0;
+  color: #fff;
+  font-family: 'Roboto Regular';
+  padding-left: 0;
+  font-size: 14px;
+  display: flex;
+}
+
+.sign-in-modal .list-group .list-group-item .b-icon.bi {
+  font-size: 22px;
+  margin-right: 12px;
+}
+
+.sign-in-modal .account-wrapper {
+  background: #fff;
+  border-radius: 4px;
+  padding: 30px;
+  min-height: 480px;
+  position: relative;
+  box-shadow: 0 0 10px #063c80;
+}
+
+.sign-in-modal .btn-account {
+  font-size: 18px;
+  font-family: 'Roboto Bold';
+  cursor: pointer;
+  color: #203152;
+  position: relative;
+  background: transparent;
+  border: 0;
+
+}
+
+
+.sign-in-modal .btn-account a {
+  color: #203152 !important;
+  position: relative;
+
+}
+
+.sign-in-modal .btn-account a::after {
+  content: '';
+  height: 2px;
+  width: 0;
+  background: #4092fb;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+}
+
+.sign-in-modal .btn-account.active a {
+  color: #4092fb !important;
+}
+.sign-in-modal .btn-account.active a::after {
+  width: 100%;
+  transition: all .2s;
+
+}
+
+.my-booking-modal .modal-body {
+  padding: 20px 60px 20px
+}
+
+.my-booking-modal .bi-x {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 28px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #F4675F;
+  color: #fff;
+  transition: all .3s;
+}
+
+.my-booking-modal .bi-x:hover {
+  color: #203152
+}
+
+.my-booking-modal .section-heading h3 {
+  padding: 0 0 8px;
+  font-size: 24px;
+  line-height: 32px;
+  font-family: 'Roboto Bold';
+  margin-bottom: 0
+}
+
+.my-booking-modal .section-heading p {
+  margin: 5px 0 30px;
+  color: #4D6F93;
+  font-size: 14px;
+  font-family: 'Roboto Regular';
+}
+
+.my-booking-modal .form-control {
+  font-family: 'Roboto Regular';
+  background: transparent;
+  height: 45px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.my-booking-modal label {
+  font-family: 'Roboto Regular';
+  color: #9b9b9b;
+  font-size: 14px;
+  position: absolute;
+  top: 15px;
+  opacity: 0;
+  z-index: -1;
+  transition: all .2s linear 0s;
+}
+
+.my-booking-modal .form-group {
+  position: relative;
+}
+
+.my-booking-modal .form-group {
+  margin-bottom: 2rem;
+}
+
+.my-booking-modal .forget-id {
+  color: #4D6F93;
+  font-size: 12px;
+  text-decoration: underline;
+  margin-top: 0;
+  display: block;
+  line-height: 18px;
+  text-align: center;
+  font-family: 'Roboto Regular';
+}
+
+@media (min-width: 768px) {
+  .sign-in-modal .col-lg-7 {
+      flex: 0 0 54.333333%;
+      max-width: 54.333333%;
+  }
+}
+
+.my-booking-modal .btn-ret {
+  border-radius: 4px;
+  color: #fff;
+  font-size: 16px;
+  background: #00a368;
+  border-color: #00a368;
+  padding: 10px 40px;
+  margin: 20px auto 0;
+  line-height: 22px;
+  font-family: 'Roboto Medium';
+}
+
+.my-booking-modal .btn-ret:active {
+  background-color: #00a368 !important;
+
+}
+
+.my-booking-modal .btn-send {
+  background: -webkit-linear-gradient(left, #427ecb 0, #1f5599 100%);
+  background: linear-gradient(to right, #427ecb 0, #1f5599 100%);
+  padding: 10px 40px;
+  font-family: 'Roboto Medium';
+  font-size: 14px;
+  border-color: #427ecb
+}
+
+
+ 
+
+
+
+
+
+
+
+
+// sign in 
+
+.account {
+  font-family: 'Roboto Regular';
+  font-size: 14px
+}
+
+.account .nav button:active,
+.account .nav button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.account .nav button {
+  flex: 1;
+}
+
+.account .nav button.btn-primary {
+  background: #607ecb !important;
+  border-color: #607ecb !important;
+  height: 40px;
+  margin-right: 10px;
+  font-size: 12px;
+  border-radius: 4px;
+  position: relative;
+}
+
+.account .nav button.btn-primary::before {
+  background: #5273c7;
+  content: '';
+  position: absolute;
+  left: 0;
+  font-size: 14px;
+  top: 0;
+  padding: 0 12px;
+  height: 100%;
+  width: 35px;
+}
+
+.account .nav button.btn-primary .unicon,
+.account .nav button.btn-danger .unicon {
+  position: absolute;
+  left: 5px;
+  top: 8px;
+}
+
+.account .nav button.btn-danger {
+  background: #F4675F;
+  border-color: #F4675F;
+  margin-left: 10px;
+  height: 40px;
+  font-size: 12px;
+  border-radius: 4px;
+  position: relative;
+}
+
+.account .or-line {
+  border-top: 1px solid #CAD6E3;
+  position: relative;
+  font-weight: 400;
+  text-align: center;
+}
+
+.account .or-line .or {
+  background: #fcfcfc;
+  bottom: 0;
+  color: #4D6F93;
+  left: 0;
+  margin: -13px auto 0;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 30px;
+  font-size: 14px;
+
+}
+
+.account .form-control {
+  padding-left: 30px;
+  padding-right: 30px;
+  color: #203152;
+  font-size: 14px;
+  height: 45px;
+  border: 1px solid #CAD6E3;
+}
+
+.account .email {
+  position: relative;
+}
+
+.account .email .b-icon {
+  position: absolute;
+  top: calc(50% - 8px);
+  color: #4D6F93;
+  left: 10px;
+}
+.mrs{
+  padding-left:5px !important;
+  padding-right:5px !important;
+ }
+.account .password {
+  position: relative;
+}
+
+.account .password .b-icon {
+  color: #4D6F93;
+  position: absolute;
+  top: calc(50% - 8px);
+}
+
+.account .password .bi-lock {
+  left: 10px;
+}
+
+.account .password .bi-eye,
+.account .password .bi-eye-slash {
+  right: 10px;
+}
+
+.account .kmsi {
+  font-size: 12px;
+  color: #4D6F93;
+}
+
+.account .forget-pass {
+  font-size: 12px;
+  text-decoration: underline;
+  color: #4D6F93;
+}
+
+.account .forget-pass:hover {
+  text-decoration: none;
+}
+
+.custom-checkbox .custom-control-label::before {
+  top: 1px
+}
+
+.custom-control-label::after {
+  top: 1px;
+}
+.keep{
+  color: #4D6F93;
+}
+.account .btn-login {
+  background: -webkit-linear-gradient(left, #427ecb 0, #1f5599 100%);
+  background: linear-gradient(to right, #427ecb 0, #1f5599 100%);
+  font-size: 16px;
+  border-color: #427ecb;
+  transition: all .3s;
+}
+
+.account .btn-login:hover {
+  background: linear-gradient(to right, #1f5599 0, #427ecb 100%);
+}
+.account .agree,
+.account .terms {
+    font-size: 12px;
+}
+
+.account .terms {
+    margin-left: 5px;
+}
+// signup
+
+.account {
+  font-family: 'Roboto Regular';
+  font-size: 14px
+}
+
+.account .nav button:active,
+.account .nav button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.account .nav button {
+  flex: 1;
+}
+
+.account .nav button.btn-primary {
+  background: #607ecb !important;
+  border-color: #607ecb !important;
+  height: 40px;
+  margin-right: 10px;
+  font-size: 12px;
+  border-radius: 4px;
+  position: relative;
+}
+
+.account .nav button.btn-primary::before {
+  background: #5273c7;
+  content: '';
+  position: absolute;
+  left: 0;
+  font-size: 14px;
+  top: 0;
+  padding: 0 12px;
+  height: 100%;
+  width: 35px;
+}
+
+.account .nav button.btn-primary .unicon,
+.account .nav button.btn-danger .unicon {
+  position: absolute;
+  left: 5px;
+  top: 8px;
+}
+
+.account .nav button.btn-danger {
+  background: #F4675F;
+  border-color: #F4675F;
+  margin-left: 10px;
+  height: 40px;
+  font-size: 12px;
+  border-radius: 4px;
+  position: relative;
+}
+
+.account .or-line {
+  border-top: 1px solid #CAD6E3;
+  position: relative;
+  font-weight: 400;
+  text-align: center;
+}
+
+.account .or-line .or {
+  background: #fcfcfc;
+  bottom: 0;
+  color: #4D6F93;
+  left: 0;
+  margin: -13px auto 0;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 30px;
+  font-size: 14px;
+
+}
+
+.account .form-control {
+  padding-left: 30px;
+  padding-right: 30px;
+  color: #203152;
+  font-size: 14px;
+  height: 45px;
+  border: 1px solid #CAD6E3;
+}
+
+.account .email {
+  position: relative;
+}
+
+.account .email .b-icon {
+  position: absolute;
+  top: calc(50% - 8px);
+  color: #4D6F93;
+  left: 10px;
+}
+
+.account .password {
+  position: relative;
+}
+
+.account .password .b-icon {
+  color: #4D6F93;
+  position: absolute;
+  top: calc(50% - 8px);
+}
+
+.account .password .bi-lock {
+  left: 10px;
+}
+
+.account .password .bi-eye,
+.account .password .bi-eye-slash {
+  right: 10px;
+}
+
+.account .kmsi {
+  font-size: 12px;
+  color: #4D6F93;
+}
+
+.account .forget-pass {
+  font-size: 12px;
+  text-decoration: underline;
+  color: #4D6F93;
+}
+
+.account .forget-pass:hover {
+  text-decoration: none;
+}
+
+.custom-checkbox .custom-control-label::before {
+  top: 1px
+}
+
+.custom-control-label::after {
+  top: 1px;
+}
+
+.account .btn-login {
+  background: -webkit-linear-gradient(left, #427ecb 0, #1f5599 100%);
+  background: linear-gradient(to right, #427ecb 0, #1f5599 100%);
+  font-size: 16px;
+  border-color: #427ecb;
+  transition: all .3s;
+}
+
+.account .btn-login:hover {
+  background: linear-gradient(to right, #1f5599 0, #427ecb 100%);
+}
+
+.account .personal-detail .form-control {
+  padding-left: 5px;
+  padding-right: 5px;
+
+}
+
+.account .personal-detail .row {
+  margin-left: -7px;
+  margin-right: -7px;
+}
+
+.account .agree,
+.account .terms {
+  font-size: 12px;
+}
+
+.account .terms {
+  margin-left: 5px;
+}
+

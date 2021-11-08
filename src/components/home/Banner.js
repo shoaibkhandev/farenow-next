@@ -8,11 +8,12 @@ export default function Banner() {
         <>
         <Box component="section">
             <Toolbar />
-            <Typography variant="h5" color="white" fontSize={34} textAlign="center" sx={{ py: 8 }}>
+            <Box  py={8} >
+            <Typography variant="h5" color="white"  fontFamily="Roboto" fontSize={34} textAlign="center" >
                 Your journey begins here with the best offers and prices
-                <Typography fontSize={32} color="white">Enjoy, compare and choose..</Typography>
             </Typography>
-            
+            <Typography fontSize={32} variant="h5" fontFamily="Roboto"  textAlign="center"color="white">Enjoy, compare and choose..</Typography>
+            </Box>
         </Box>
         </>
     )
