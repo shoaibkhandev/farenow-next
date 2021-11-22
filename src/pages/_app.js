@@ -8,7 +8,8 @@ import "@styles/globals.scss";
 import { GlobleStyles } from "../theme/globleStyles";
 import Noop from '@components/layout/Layout'
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
 
 function handleExitComplete() {

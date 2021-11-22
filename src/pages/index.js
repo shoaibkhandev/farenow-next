@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import Banner from "@components/home/Banner";
 import Trandingholiday from "@components/home/Trandingholiday";
 import Planing from "@components/home/Planing";
@@ -10,16 +10,16 @@ import Flight from "@components/home/Flight";
 export default function Home() {
   return (
     <>
-    <Box component="main" className="home">
-      <Banner />
-      <Flight/>
-    </Box>
-      <Trandingholiday/>
-      <Planing/>
-      <Ourapp/>
-      <Essantial/>
-      <Topsection/>
-  </>
+      <Box component="main" className="home">
+        <Banner />
+        <Flight />
+      </Box>
+      <Trandingholiday />
+      <Planing />
+      <Ourapp />
+      <Essantial />
+      <Topsection />
+    </>
   );
 }
 

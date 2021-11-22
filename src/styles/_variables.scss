@@ -20,13 +20,16 @@ $img-path: "/static/img/";
 // Roboto
 @font-face {
   src: url("#{$roboto-font-path}Roboto-Regular.ttf");
-  font-family: "Roboto Regular";
+  font-family: "Roboto";
 }
 @font-face {
   src: url("#{$roboto-font-path}Roboto-Bold.ttf");
-  font-family: "Roboto Bold";
+  font-family: "Roboto-Bold";
 }
 @font-face {
   src: url("#{$roboto-font-path}Roboto-Medium.ttf");
-  font-family: "Roboto Medium";
+  font-family: "Roboto-Medium";
+}
+body {
+  font-family: "Roboto" !important;
 }
