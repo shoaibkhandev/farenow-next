@@ -47,7 +47,7 @@ export default function SigninModal() {
             "& svg": {
               width: "20px",
               height: "20px",
-              fill: theme.palette.common.white,
+              fill: router.pathname === "/" ? theme.palette.common.white : theme.palette.common.black,
             },
           }}
         >
@@ -67,7 +67,7 @@ export default function SigninModal() {
             <div className=" my-booking-modal">
               <Box padding={5}>
                 <svg
-                  
+
                   viewBox="0 0 16 16"
                   width="1em"
                   height="1em"
@@ -90,12 +90,12 @@ export default function SigninModal() {
                   <h3>Manage Your Booking</h3>
                   <p>View, Print, Email or Change your Itinerary</p>
                 </div>
-                <div  className="row">
-                  <div  className="col-12">
-                    <div  className="form-group email">
+                <div className="row">
+                  <div className="col-12">
+                    <div className="form-group email">
                       <label >Email-ID</label>{" "}
                       <input
-                        
+
                         type="email"
                         placeholder="Email address used while Booking"
                         className="form-control"
@@ -104,12 +104,12 @@ export default function SigninModal() {
                     </div>
                   </div>
                 </div>
-                <div  className="row">
-                  <div  className="col-12">
-                    <div  className="form-group email">
+                <div className="row">
+                  <div className="col-12">
+                    <div className="form-group email">
                       <label >Flyin trip ID</label>{" "}
                       <input
-                        
+
                         type="text"
                         placeholder="Flyin trip ID"
                         className="form-control"
@@ -119,7 +119,7 @@ export default function SigninModal() {
                   </div>
                 </div>
                 <a
-                  
+
                   onClick={() => {
                     setforgot(false);
                   }}
@@ -129,9 +129,9 @@ export default function SigninModal() {
                 >
                   Forgot Flyin Trip ID?
                 </a>
-                <div  className="form-group text-center">
+                <div className="form-group text-center">
                   <button
-                    
+
                     type="button"
                     className="btn btn-ret btn-secondary"
                   >
@@ -145,7 +145,7 @@ export default function SigninModal() {
           <DialogContent>
             <div className=" my-booking-modal">
               <svg
-                
+
                 viewBox="0 0 16 16"
                 width="1em"
                 height="1em"
@@ -166,19 +166,19 @@ export default function SigninModal() {
               </svg>
               <Box padding={5}>
                 <form >
-                  <div  className="section-heading">
+                  <div className="section-heading">
                     <h3 >Forgot Flyin Trip ID?</h3>{" "}
                     <p >
                       We will send the latest reference number to the email
                       address that you have used while booking.
                     </p>
                   </div>{" "}
-                  <div  className="row">
-                    <div  className="col-12">
-                      <div  className="form-group email">
+                  <div className="row">
+                    <div className="col-12">
+                      <div className="form-group email">
                         <label >Email-ID</label>{" "}
                         <input
-                          
+
                           type="email"
                           placeholder="Please enter your Email-ID"
                           className="form-control"
@@ -187,13 +187,13 @@ export default function SigninModal() {
                       </div>
                     </div>
                   </div>{" "}
-                  <hr  />{" "}
+                  <hr />{" "}
                   <div
-                    
+
                     className="form-group text-center mt-4"
                   >
                     <button
-                      
+
                       type="button"
                       className="btn btn-send btn-secondary"
                     >

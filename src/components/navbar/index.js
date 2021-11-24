@@ -86,7 +86,7 @@ export default function ButtonAppBar() {
                                     aria-expanded={state.open ? "true" : undefined}
                                     aria-haspopup="true"
                                 >
-                                    <ListItemIcon sx={{ minWidth: 0, transform: 'rotate(90deg)', mr: .2, '& svg': { width: '16px', height: '16px', fill: theme.palette.common.white } }}>
+                                    <ListItemIcon sx={{ minWidth: 0, transform: 'rotate(90deg)', mr: .2, '& svg': { width: '16px', height: '16px', fill: router.pathname === "/" ? theme.palette.common.white : theme.palette.common.black } }}>
                                         <LocalOfferIcon />
                                     </ListItemIcon>
                                     <Badge sx={{ '& .MuiBadge-badge': { fontSize: '9px', fontWeight: 400, minWidth: '2px', height: '14px', p: '0 4px', top: -3 } }} color="error" badgeContent={1}>

@@ -51,7 +51,7 @@ export default function SigninModal() {
             "& svg": {
               width: "20px",
               height: "20px",
-              fill: theme.palette.common.white,
+              fill: router.pathname === "/" ? theme.palette.common.white : theme.palette.common.black
             },
           }}
         >
