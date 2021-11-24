@@ -4,9 +4,7 @@ import {
   Row,
   Col,
 } from "react-bootstrap";
-import landon from "../../../public/static/img/landon-horz.ef01ad4.jpg";
-import Image from "next/image";
-import { Divider, Box } from "@mui/material";
+import { Box } from "@mui/material";
 export default function Trandingholiday() {
   return (
     <div>
@@ -16,7 +14,7 @@ export default function Trandingholiday() {
             <div className="vaction-wrapper">
               <Row>
                 <Col md={8}>
-                  <Image src={landon} className="img-fluid" />
+                  <Box component="img" src="/static/img/landon-horz.ef01ad4.jpg" className="img-fluid" />
                 </Col>
                 <Col md={4}>
                   <div className="vaction-right">

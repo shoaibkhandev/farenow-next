@@ -1,7 +1,6 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 import Head from "next/head";
-import { AnimatePresence } from "framer-motion";
 import AppThemeProvider from "../theme";
 import CssBaseline from "@mui/material/CssBaseline";
 import "@styles/globals.scss";

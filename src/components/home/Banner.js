@@ -2,7 +2,6 @@ import React from 'react'
 import { Toolbar, Box, Typography } from '@mui/material'
 
 
-
 export default function Banner() {
     return (
         <>

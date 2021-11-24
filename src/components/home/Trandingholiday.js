@@ -4,12 +4,7 @@ import {
   Row,
   Col,
 } from "react-bootstrap";
-import Dubaiimage1 from "../../../public/static/img/holiday-dubai.10a510e.png";
-import Dubaiimage2 from "../../../public/static/img/holiday-Egypt.0206352.png";
-import Dubaiimage3 from "../../../public/static/img/holiday-Maldives.45483c4.png";
-import Dubaiimage4 from "../../../public/static/img/holiday-georgia.8a71386.png";
-import Image from "next/image";
-
+import {Box} from '@mui/material'
 export default function Trandingholiday() {
   return (
     <div>
@@ -24,7 +19,7 @@ export default function Trandingholiday() {
               <div className="text-white">
                 <div className="holiday-item">
                   <div className="overly"></div>
-                  <Image src={Dubaiimage1} className="img-fluid" />
+                  <Box component="img" src="/static/img/holiday-dubai.10a510e.png" className="img-fluid" />
                   <div className="middle-text">
                     <h5> Dubai, United Arab Emirates</h5>
                     <button variant="outline-primary"> View Holidays </button>
@@ -40,7 +35,7 @@ export default function Trandingholiday() {
               <div className="text-white">
                 <div className="holiday-item">
                   <div className="overly"></div>
-                  <Image src={Dubaiimage2} className="img-fluid" />
+                  <Box component="img" src="/static/img/holiday-Egypt.0206352.png" className="img-fluid" />
                   <div className="middle-text">
                     <h5>Cairo, Egypt</h5>
                     <button variant="outline-primary"> View Holidays </button>
@@ -56,7 +51,7 @@ export default function Trandingholiday() {
               <div className="text-white">
                 <div className="holiday-item">
                   <div className="overly"></div>
-                  <Image src={Dubaiimage3} className="img-fluid" />
+                  <Box component="img" src="/static/img/holiday-Maldives.45483c4.png" className="img-fluid" />
                   <div className="middle-text">
                     <h5>Maldives, Maldives</h5>
                     <button variant="outline-primary"> View Holidays </button>
@@ -72,7 +67,7 @@ export default function Trandingholiday() {
               <div className="text-white">
                 <div className="holiday-item">
                   <div className="overly"></div>
-                  <Image src={Dubaiimage4} className="img-fluid" />
+                  <Box component="img" src="/static/img/holiday-georgia.8a71386.png" className="img-fluid" />
                   <div className="middle-text">
                     <h5>Tbilisi, Georgia</h5>
                     <button variant="outline-primary"> View Holidays </button>

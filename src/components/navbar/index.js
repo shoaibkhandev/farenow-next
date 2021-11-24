@@ -67,7 +67,7 @@ export default function ButtonAppBar() {
                             {leftside?.map((item, index) => (
                                 <ListItem disablePadding key={`navleft-${index}`} sx={{ width: 'auto' }}>
                                     <ListItemButton component={Link} href={item.href} >
-                                        <Badge sx={{ '& .MuiBadge-badge': { borderRadius: '1px', fontSize: '9px', fontWeight: 400, p: '0 4px', height: '14px', '&:before': { content: "''", position: 'absolute', left: "3px", bottom: "3px", width: 0, height: 0, borderLeft: "3px solid transparent", borderRight: "3px solid transparent", borderTop: "3px solid #F4675F" } } }} color="error" badgeContent={item.label !== undefined ? item.label : null}>
+                                        <Badge sx={{ '& .MuiBadge-badge': { borderRadius: '1px', fontSize: '9px', fontWeight: 400, p: '0 4px', height: '14px', '&:before': { content: "''", position: 'absolute', left: "3px", bottom: "-3px", width: 0, height: 0, borderLeft: "3px solid transparent", borderRight: "3px solid transparent", borderTop: "3px solid #F4675F" } } }} color="error" badgeContent={item.label !== undefined ? item.label : null}>
                                             <ListItemText sx={{ color: router.pathname === "/" ? theme.palette.common.white : theme.palette.common.black }} primary={item.text} />
                                         </Badge>
                                     </ListItemButton>

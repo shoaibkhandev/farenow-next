@@ -1,6 +1,6 @@
 import React from "react";
-import { Divider, Box, Toolbar, Grid, Button } from "@mui/material";
-import Bookingprocess from "../components/common/speedupsign";
+import {Toolbar, } from "@mui/material";
+import Bookingprocess from "@components/common/speedupsign";
 import Review from "@components/common/reviewFlight";
 import Provide from "@components/common/provide";
 import Tripsummery from "@components/common/tripsummery";
