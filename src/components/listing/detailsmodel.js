@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Collapse from "@mui/material/Collapse";
 import Image from "next/image";
 import pia from "../../../public/static/img/PK.8288519.png";
@@ -10,6 +10,10 @@ import { useRouter } from "next/router";
 export default function Detailsmodel({ details, setdetails }) {
   const [listingopen, setlistingopen] = React.useState(false);
 
+  useEffect(() => {
+    document.querySelector('.itemInfo').scrollIntoView();
+  })
+  
   const router = useRouter();
   return (
     <>
