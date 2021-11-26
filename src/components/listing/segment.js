@@ -1,11 +1,10 @@
 import React from "react";
-import { Divider, Box, Toolbar, Grid, Button } from "@mui/material";
-import Image from "next/image";
-import pia from "../../../public/static/img/PK.8288519.png";
+import { Grid, } from "@mui/material";
 import { useRouter } from "next/router";
 import Detailsmodel from "./detailsmodel";
 import List from "./list";
 
+import { Box } from '@mui/material'
 export default function Segment({
   listingArr
 }) {

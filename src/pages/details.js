@@ -3,12 +3,11 @@ import Speedupsign from '@components/common/speedupsign';
 import ReviewFlight from '@components/common/reviewFlight';
 import Provide from '@components/common/provide';
 import Tripsummery from '@components/common/tripsummery';
-import { Divider, Box, Toolbar, Grid, Button } from '@mui/material';
+import { Toolbar, } from '@mui/material';
 import { useRouter } from 'next/router';
 
 export default function Details() {
    const router = useRouter();
-
    return (
       <>
          <Toolbar />

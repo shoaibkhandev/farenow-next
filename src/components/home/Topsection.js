@@ -1,15 +1,9 @@
 import React from "react";
 import {
-  Button,
-  Navbar,
   Container,
-  NavDropdown,
-  Nav,
   Row,
   Col,
 } from "react-bootstrap";
-import landon from "../../../public/static/img/landon-horz.ef01ad4.jpg";
-import Image from "next/image";
 import { Divider, Box } from "@mui/material";
 export default function Trandingholiday() {
   return (

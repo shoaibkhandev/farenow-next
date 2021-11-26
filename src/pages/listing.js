@@ -1,15 +1,13 @@
 import React from "react";
-import { Divider, Box, Toolbar, Grid, Button } from "@mui/material";
+import { Toolbar, } from "@mui/material";
 import Collapse from "@mui/material/Collapse";
-import Tabs from "../components/home/Tabs";
-import { Container, Row, Col } from "react-bootstrap";
-import Image from "next/image";
-import pia from "../../public/static/img/PK.8288519.png";
+import Tabs from "@components/home/Tabs";
+import { Row, Col } from "react-bootstrap";
 import Slider from "react-slick";
 import Segment from "@components/listing/segment";
-import Topsection from "../components/home/Topsection";
+import Topsection from "@components/home/Topsection";
 import Filter from "@components/listing/filter";
-
+import {Box} from '@mui/material'
 export default function Listing() {
   const [open, setOpen] = React.useState(false);
 
@@ -4192,8 +4190,8 @@ export default function Listing() {
                         <div className="item-airline">
                           <a target="_self" className="pia-dcoration">
                             <figure>
-                              <Image
-                                src={pia}
+                              <Box  component="img"
+                                src="/static/img/PK.8288519.png"
                                 width="25px"
                                 height="20px"
                                 className="img-fluid"

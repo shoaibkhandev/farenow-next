@@ -1,6 +1,5 @@
 import React from "react";
-import Image from "next/image";
-import Cardimage from "../../../public/static/img/card-img-vis-mas-mada-amx.v12346.171720a.png";
+import {Box} from '@mui/material'
 
 export default function pay() {
   return (
@@ -12,7 +11,7 @@ export default function pay() {
         </div>
         <div className="fancy-wrapper">
           <div className="right p-2">
-            <Image src={Cardimage} width="300" className="img-fluid" />
+            <Box  component="img" src="/static/img/card-img-vis-mas-mada-amx.v12346.171720a.png" width={300} className="img-fluid"   />
           </div>
           <div className="left">
             <div className="header">
@@ -31,7 +30,6 @@ export default function pay() {
                       max="16"
                       defaultValue=""
                       className="form-control"
-                      style={{ backgroundImage: `url(${Cardimage})` }}
                       id="__BVID__64"
                     />
                   </div>

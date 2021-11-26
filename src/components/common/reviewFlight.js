@@ -1,6 +1,5 @@
 import React from "react";
 import { Box } from "@mui/material";
-import Image from "next/image";
 import Collapse from "@mui/material/Collapse";
 
 export default function Review() {
@@ -12,7 +11,7 @@ export default function Review() {
       <div className="content-wrapper">
         <div className="content-wrapper-header" >
           <span >1</span>
-          <h4 >Review your flight</h4>
+          <h4>Review your flight</h4>
         </div>
         <div className="review-flight" >
           <Collapse in={detail} timeout="auto" unmountOnExit>
@@ -24,7 +23,6 @@ export default function Review() {
                     fill="#4D6F93"
                     width="18"
                     className="unicon mr-1"
-
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -47,9 +45,8 @@ export default function Review() {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     className="bi-arrow-right mx-1 b-icon bi text-secondary"
-
                   >
-                    <g >
+                    <g>
                       <path
                         fillRule="evenodd"
                         d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
@@ -57,8 +54,7 @@ export default function Review() {
                     </g>
                   </svg>
                   Dubai
-                  <small className="text-muted ml-2" >
-                    {" "}
+                  <small className="text-muted ml-2">
                     Thu, 22 Oct 2020
                   </small>
                 </li>
@@ -78,10 +74,10 @@ export default function Review() {
                 <div className="col-md-3" >
                   <span className="time" >
                     14:50
-                  </span>{" "}
+                  </span>
                   <span className="date" >
                     22 Oct
-                  </span>{" "}
+                  </span>
                   <span className="placeName" >
                     Lahore
                     <label >(LHE)</label>
@@ -90,10 +86,10 @@ export default function Review() {
                 <div className="col-md-3" >
                   <span className="time" >
                     14:50
-                  </span>{" "}
+                  </span>
                   <span className="date" >
                     22 Oct
-                  </span>{" "}
+                  </span>
                   <span className="placeName" >
                     Dubai
                     <label >(DXB)</label>
@@ -102,7 +98,7 @@ export default function Review() {
                 <div className="col-md-4" >
                   <span className="non-stop" >
                     Non Stop
-                  </span>{" "}
+                  </span>
                   <span className="trip-dur" >
                     Trip Duration: 3 hrs 10 min
                   </span>
@@ -147,7 +143,6 @@ export default function Review() {
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
                       className="bi-arrow-right mx-1 b-icon bi text-secondary"
-
                     >
                       <g >
                         <path
@@ -158,7 +153,7 @@ export default function Review() {
                     </svg>
                     Dubai
                     <small className="text-muted ml-2" >
-                      {" "}
+                      
                       Thu, 22 Oct 2020
                     </small>
                   </li>
@@ -185,14 +180,14 @@ export default function Review() {
                   <div className="col-md-2" >
                     <span className="top-heading" >
                       Flight No
-                    </span>{" "}
+                    </span>
                     <Box component="img" src='static/img/PK.8288519.png' className="img-fluid" />
                     <div className="airline-name" >
                       Pakistan International Airlines
                     </div>
                     <span className="flight-no" >
                       PK - 203
-                    </span>{" "}
+                    </span>
                     <span className="seat-no" >
                       32A
                     </span>
@@ -200,18 +195,18 @@ export default function Review() {
                   <div className="col-md-3" >
                     <span className="top-heading" >
                       Departing
-                    </span>{" "}
+                    </span>
                     <span className="placeName" >
                       Lahore
                       <label >(LHE)</label>
-                    </span>{" "}
+                    </span>
                     <span className="time" >
                       14:50
                     </span>
                     ,
                     <span className="date" >
                       22 Oct 2020
-                    </span>{" "}
+                    </span>
                     <span className="airport-name" >
                       Allama Iqbal International Airport, Lahore
                     </span>
@@ -219,18 +214,18 @@ export default function Review() {
                   <div className="col-md-3" >
                     <span className="top-heading" >
                       Arriving
-                    </span>{" "}
+                    </span>
                     <span className="placeName" >
                       Lahore
                       <label >(LHE)</label>
-                    </span>{" "}
+                    </span>
                     <span className="time" >
                       14:50
                     </span>
                     ,
                     <span className="date" >
                       22 Oct 2020
-                    </span>{" "}
+                    </span>
                     <span className="airport-name" >
                       Allama Iqbal International Airport, Lahore
                     </span>
@@ -238,15 +233,15 @@ export default function Review() {
                   <div className="col-md-4" >
                     <span className="top-heading" >
                       Class/Baggage
-                    </span>{" "}
+                    </span>
                     <span className="seat-type pb-2" >
                       Economy
-                    </span>{" "}
+                    </span>
                     <span className="cabin" >
                       Cabin: <label >7 Kilos</label>
-                    </span>{" "}
+                    </span>
                     <span className="checkin" >
-                      Check In: <em > 0 Pieces</em>{" "}
+                      Check In: <em > 0 Pieces</em>
                       <label >(Per Person)</label>
                     </span>
                   </div>
@@ -302,9 +297,9 @@ export default function Review() {
             className="btn btn-link"
 
           >
-            {" "}
-            {open ? "Show more details" : "Show less details"}{" "}
-          </button>{" "}
+            
+            {open ? "Show more details" : "Show less details"}
+          </button>
           <a href="#" type="button" className="btn btn-link" >
             Change this Flight
           </a>

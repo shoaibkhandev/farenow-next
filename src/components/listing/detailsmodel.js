@@ -1,11 +1,7 @@
 import React, { useEffect } from "react";
 import Collapse from "@mui/material/Collapse";
-import Image from "next/image";
-import pia from "../../../public/static/img/PK.8288519.png";
-import emrates from "../../../public/static/img/emrates.jpg";
-import seats from "../../../public/static/img/seats.jpg";
-import seatspink from "../../../public/static/img/seatspink.jpg";
 import { useRouter } from "next/router";
+import {Box} from '@mui/material'
 
 export default function Detailsmodel({ details, setdetails }) {
   const [listingopen, setlistingopen] = React.useState(false);
@@ -81,8 +77,9 @@ export default function Detailsmodel({ details, setdetails }) {
               <div className="row align-items-start" data-v-198f7814="">
                 <div className="col-3 airline-info" data-v-198f7814="">
                   <figure className="mb-0 px-2" data-v-198f7814="">
-                    <Image
-                      src={pia}
+                    <Box
+                      component="img"
+                      src="/static/img/PK.8288519.png"
                       className="img-fluid"
                       data-v-198f7814=""
                       className="pia-dilog"
@@ -326,8 +323,8 @@ export default function Detailsmodel({ details, setdetails }) {
                       aria-controls="collapse-plane-images"
                       style={{ overflowAnchor: "none" }}
                     >
-                      <Image
-                        src={emrates}
+                      <Box component="img"
+                        src="/static/img/emrates.jpg"
                         className="img-fluid img-flight "
                         data-v-198f7814=""
                       />
@@ -335,8 +332,9 @@ export default function Detailsmodel({ details, setdetails }) {
                   </li>
                   <li className="navbar-text" data-v-198f7814="">
                     {" "}
-                    <Image
-                      src={seatspink}
+                    <Box
+                      component="img"
+                      src="/static/img/seatspink.jpg"
                       className="img-fluid img-flight "
                       data-v-198f7814=""
                     />{" "}
@@ -363,8 +361,8 @@ export default function Detailsmodel({ details, setdetails }) {
                     <div className="row" data-v-198f7814="">
                       <div className="col-md-3" data-v-198f7814="">
                         <figure className="mb-0" data-v-198f7814="">
-                          <Image
-                            src={emrates}
+                          <Box component="img"
+                        src="/static/img/emrates.jpg"
                             className="img-fluid"
                             data-v-198f7814=""
                           />{" "}
@@ -373,20 +371,21 @@ export default function Detailsmodel({ details, setdetails }) {
                       </div>
                       <div className="col-md-3" data-v-198f7814="">
                         <figure className="mb-0" data-v-198f7814="">
-                          <Image
-                            src={seats}
+                          <Box component="img"
+                            src="/static/img/seats.jpg"
                             className="img-fluid"
                             data-v-198f7814=""
                           />{" "}
                           <span data-v-198f7814="">
-                            ClassNclassName Overview
+                            className Overview
                           </span>
                         </figure>
                       </div>
                       <div className="col-md-3" data-v-198f7814="">
                         <figure className="mb-0" data-v-198f7814="">
-                          <Image
-                            src={seatspink}
+                          <Box
+                      component="img"
+                      src="/static/img/seatspink.jpg"
                             className="img-fluid"
                             data-v-198f7814=""
                           />{" "}

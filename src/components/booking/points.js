@@ -1,7 +1,7 @@
 import React from "react";
-import { Divider, Box,  } from "@mui/material";
+import { Box, } from "@mui/material";
 import Collapse from "@mui/material/Collapse";
-import { Container, Form } from "react-bootstrap";
+import {Form } from "react-bootstrap";
 
 export default function points() {
   const [qitaaf, setqitaaf] = React.useState(false);
