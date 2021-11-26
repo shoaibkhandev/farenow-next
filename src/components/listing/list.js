@@ -1,8 +1,6 @@
 import React from 'react'
-import pia from "../../../public/static/img/PK.8288519.png";
-import Image from "next/image";
 import Detailsmodel from "./detailsmodel";
-
+import { Box } from '@mui/material';
 export default function list({ direction, name, listingIndex, index, radioName }) {
     const [details, setdetails] = React.useState(null);
     return (
@@ -83,7 +81,7 @@ export default function list({ direction, name, listingIndex, index, radioName }
                             <div className="airline-detail col-md-12 col-lg-12 col-xl-3">
                                 <div className="airline-info cleafix">
                                     <figure className="mb-0">
-                                        <Image src={pia} />
+                                        <Box src='/static/img/PK.8288519.png' />
                                     </figure>
                                     <div className="airline-name">
                                         <span>Pakistan International Airlines</span>{" "}
