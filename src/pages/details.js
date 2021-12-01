@@ -5,9 +5,14 @@ import Provide from '@components/common/provide';
 import Tripsummery from '@components/common/tripsummery';
 import { Toolbar, } from '@mui/material';
 import { useRouter } from 'next/router';
+import { useSelector, useDispatch } from 'react-redux'
 
 export default function Details() {
    const router = useRouter();
+
+   const { state } = useSelector(state => state);
+   console.log(state)
+
    return (
       <>
          <Toolbar />

@@ -9,7 +9,7 @@ import Slider from "react-slick";
 import Segment from "@components/listing/segment";
 import Topsection from "@components/home/Topsection";
 import Filter from "@components/listing/filter";
-import { Box } from '@mui/material'
+import { Box, CircularProgress } from '@mui/material'
 import { da } from 'date-fns/locale';
 
 export async function getServerSideProps(context) {
@@ -44,27 +44,32 @@ export async function getServerSideProps(context) {
     )
   }
 
-  console.log(params)
-
-  let listingArr = []
-  try {
-    const { data } = await axios.post(`http://localhost:3001/v1/flights/list`, params);
-    listingArr = data
-  } catch (error) {
-    console.error(error);
-  }
-
   return {
     props: {
-      listingArr
-    }, 
+      params
+    },
   }
 }
 
-export default function Listing({ listingArr }) {
+export default function Listing({ params }) {
   const router = useRouter()
 
   const [open, setOpen] = React.useState(false);
+  const [loading, setLoading] = React.useState(true)
+  const [listingArr, setListingArr] = React.useState([])
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  async function fetchData() {
+    try {
+      const { data } = await axios.post(`http://localhost:3001/v1/flights/list`, params);
+      setListingArr(data)
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   const handleClick = () => {
     setOpen(!open);
@@ -242,20 +247,24 @@ export default function Listing({ listingArr }) {
                 </div>
               </div>
 
-              {/* ................................ */}
-              <Segment
-                listingArr={listingArr}
-              />
+              {loading && <div className='pannel'>
+                <CircularProgress />
+              </div>}
 
-              {/* ....................... */}
+              {!loading && !listingArr.length && <div className='pannel'>
+                No hotels found
+              </div>}
+
+              {!loading && <Segment
+                listingArr={listingArr}
+              />}
+
+
             </Col>
           </Row>
         </div>
         <Topsection />
       </div>
-
-
-
     </div>
   );
 }

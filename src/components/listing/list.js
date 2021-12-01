@@ -1,9 +1,19 @@
 import React from 'react'
 import Detailsmodel from "./detailsmodel";
 import { Box } from '@mui/material';
+import { setDepartured, setReturned } from '@redux/slices/Reducer'
+import { useDispatch } from 'react-redux'
+
 export default function list({ direction, name, listingIndex, index, radioName }) {
+
+    const dispatch = useDispatch()
+
     function setDirection(direction) {
-        console.log(direction)
+        if (name === "Departure") {
+            dispatch(setDepartured(direction))
+        } else {
+            dispatch(setReturned(direction))
+        }
     }
 
     const [details, setdetails] = React.useState(null);

@@ -3,16 +3,20 @@ import { createSlice } from "@reduxjs/toolkit";
 export const Reducer = createSlice({
   name: "actionState",
   initialState: {
-    openSidebar: false,
+    departured: {},
+    returned: {}
   },
   reducers: {
-    openSidebar: (state) => {
-      state.openSidebar = !state.openSidebar;
+    setDepartured: (state, action) => {
+      state.departured = action.payload;
+    },
+    setReturned: (state, action) => {
+      state.returned = action.payload;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { openSidebar } = Reducer.actions;
+export const { setDepartured, setReturned } = Reducer.actions;
 
 export default Reducer.reducer;

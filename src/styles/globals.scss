@@ -2641,6 +2641,17 @@ aside .filter-pannel .section .airline-tag .airline-img {
   position: relative;
 }
 
+.pannel {
+  background: #fff;
+  border-radius: 5px;
+  margin: 0 0 15px;
+  position: relative;
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .txtEclipse {
   width: 57%;
   overflow: hidden;
