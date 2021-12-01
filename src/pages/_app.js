@@ -7,9 +7,10 @@ import "@styles/globals.scss";
 import { GlobleStyles } from "../theme/globleStyles";
 import Noop from '@components/layout/Layout'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+import store from '@redux/store';
+import { Provider } from 'react-redux'
 
 function handleExitComplete() {
   if (typeof window !== "undefined") {
@@ -25,16 +26,17 @@ function MyApp(props) {
         <title>FlyIn</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
-      <AppThemeProvider>
-        <Layout>
-          <GlobleStyles>
-            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-            <CssBaseline />
-            <Component {...pageProps} />
-          </GlobleStyles>
-        </Layout>
-      </AppThemeProvider>
-
+      <Provider store={store}>
+        <AppThemeProvider>
+          <Layout>
+            <GlobleStyles>
+              {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+              <CssBaseline />
+              <Component {...pageProps} />
+            </GlobleStyles>
+          </Layout>
+        </AppThemeProvider>
+      </Provider>
     </>
   );
 }
