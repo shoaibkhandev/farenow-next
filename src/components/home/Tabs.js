@@ -1,27 +1,89 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { Container, Form } from "react-bootstrap";
 import { useRouter } from "next/router";
 import Datedata from "./Date";
 import Returningdate from "./Returningdate";
+import { position } from "stylis";
+import { func } from "prop-types";
 export default function Tabs() {
-  const [oneway, setoneway] = useState("roundtrip");
-
+  const [adults, setAdults] = useState(1)
+  const [childs, setChilds] = useState(0)
+  const [infants, setInfants] = useState(0)
+  const [type, setType] = useState("roundtrip");
+  const [classType, setClassType] = useState("Economy");
   const [travel, settravel] = useState(false);
+  const [fromDate, setFromDate] = useState("")
+  const [toDate, setToDate] = useState("")
+  const [from, setFrom] = useState({})
+  const [fromSugggestionList, setfromSugggestionList] = useState([])
+  const [suggestionsfrom, setsuggestionsfrom] = useState(false)
+  const [to, setTo] = useState("")
+  const [toSugggestionList, settoSugggestionList] = useState([])
+  const [suggestionsTo, setsuggestionsTo] = useState(false)
   const router = useRouter();
+
+  async function fromAutocomplete(key) {
+    setFrom(key)
+    setsuggestionsfrom(true)
+    try {
+      const { data } = await axios.get(`http://localhost:3001/v1/flights/autoComplete?q=${key}`);
+      console.log(data.result.airports)
+      setfromSugggestionList(data.result.airports)
+    } catch (error) {
+      console.error(error);
+    }
+    if (!key) {
+      setsuggestionsfrom(false)
+    }
+  }
+
+  async function toAutocomplete(key) {
+    setTo(key)
+    setsuggestionsTo(true)
+    try {
+      const { data } = await axios.get(`http://localhost:3001/v1/flights/autoComplete?q=${key}`);
+      console.log(data.result.airports)
+      settoSugggestionList(data.result.airports)
+    } catch (error) {
+      console.error(error);
+    }
+    if (!key) {
+      setsuggestionsTo(false)
+    }
+  }
+
+  function selectFromSuggestion(item) {
+    setsuggestionsfrom(false)
+    setFrom(item)
+  }
+
+  function selectToSuggestion(item) {
+    setsuggestionsTo(false)
+    setTo(item)
+  }
+
+  function totalTraveler() {
+    return Number(adults) + Number(childs) + Number(infants)
+  }
+
+  function submit() {
+    router.push(`/listing?adults=1&childs=0&infants=0&depart_date=${fromDate ? fromDate.toISOString().substring(0, 10) : ''}&return_date=${toDate ? toDate.toISOString().substring(0, 10) : ''}&type=${type}&from=${from.code}&to=${to.code}&classType=${classType}`)
+  }
+
   return (
     <div>
       <Container>
         <div className="inner-wrapper">
-          <Form onChange={(e) => setoneway(e.target.value)}>
+          <Form onChange={(e) => setType(e.target.value)}>
             <div className="mb-3 radio-setting ">
               <Form.Check
                 type="radio"
                 id={`default-name1`}
                 label="Round Trip"
                 name="tourtype"
-                className={`me-3 ${
-                  router.pathname === "/listing" ? "listing-blue" : "text-white"
-                }   `}
+                className={`me-3 ${router.pathname === "/listing" ? "listing-blue" : "text-white"
+                  }   `}
                 value="roundtrip"
                 defaultChecked
               />
@@ -29,96 +91,145 @@ export default function Tabs() {
                 type="radio"
                 id={`default-name2`}
                 label="One Way"
-                className={`me-3 ${
-                  router.pathname === "/listing" ? "listing-blue" : "text-white"
-                }   `}
+                className={`me-3 ${router.pathname === "/listing" ? "listing-blue" : "text-white"
+                  }   `}
                 name="tourtype"
                 value="oneway"
-              />
-              <Form.Check
-                type="radio"
-                id={`default-name3`}
-                label="Multi City"
-                className={`me-3 ${
-                  router.pathname === "/listing" ? "listing-blue" : "text-white"
-                }   `}
-                name="tourtype"
-                value="city"
               />
             </div>
           </Form>
 
           {/* ............................................................ */}
 
-          <ul className="nav align-items-end">
-            <li className="navbar-text search-items px-1 leaving">
-              <label>Leaving from</label>{" "}
-              <input
-                type="text"
-                placeholder="City or Airport"
-                className="form-control"
-                id="__BVID__41"
-              />{" "}
-              <unicon
-                name="map-marker"
-                fill="#7799BE"
-                width="20"
-                className="unicon"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="24"
-                  viewBox="0 0 24 24"
+          <ul className="search-section nav align-items-end">
+            <div style={{ width: "100%", position: "relative" }}>
+              <li className="navbar-text navbar-inputs search-items px-1 leaving">
+                <label>Leaving from</label>{" "}
+                <input
+                  type="text"
+                  placeholder="City or Airport"
+                  value={from.name}
+                  onChange={(e) => fromAutocomplete(e.target.value)}
+                  className="form-control"
+                  id="__BVID__41"
+                />{" "}
+                <unicon
+                  name="map-marker"
                   fill="#7799BE"
-                >
-                  <path d="M12,2a8,8,0,0,0-8,8c0,5.4,7.05,11.5,7.35,11.76a1,1,0,0,0,1.3,0C13,21.5,20,15.4,20,10A8,8,0,0,0,12,2Zm0,17.65c-2.13-2-6-6.31-6-9.65a6,6,0,0,1,12,0C18,13.34,14.13,17.66,12,19.65ZM12,6a4,4,0,1,0,4,4A4,4,0,0,0,12,6Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,12Z"></path>
-                </svg>
-              </unicon>{" "}
-              <unicon name="exchange" width="20" className="unicon exchange">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
                   width="20"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="inherit"
+                  className="unicon"
                 >
-                  <path d="M18,10a1,1,0,0,0-1-1H5.41l2.3-2.29A1,1,0,0,0,6.29,5.29l-4,4a1,1,0,0,0-.21,1.09A1,1,0,0,0,3,11H17A1,1,0,0,0,18,10Zm3.92,3.62A1,1,0,0,0,21,13H7a1,1,0,0,0,0,2H18.59l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l4-4A1,1,0,0,0,21.92,13.62Z"></path>
-                </svg>
-              </unicon>
-            </li>
-            <li className="navbar-text search-items px-1">
-              <label>Going to</label>{" "}
-              <input
-                type="text"
-                placeholder="City or Airport"
-                className="form-control"
-                id="__BVID__44"
-              />{" "}
-              <unicon
-                name="map-marker"
-                fill="#7799BE"
-                width="20"
-                className="unicon"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="24"
-                  viewBox="0 0 24 24"
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="#7799BE"
+                  >
+                    <path d="M12,2a8,8,0,0,0-8,8c0,5.4,7.05,11.5,7.35,11.76a1,1,0,0,0,1.3,0C13,21.5,20,15.4,20,10A8,8,0,0,0,12,2Zm0,17.65c-2.13-2-6-6.31-6-9.65a6,6,0,0,1,12,0C18,13.34,14.13,17.66,12,19.65ZM12,6a4,4,0,1,0,4,4A4,4,0,0,0,12,6Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,12Z"></path>
+                  </svg>
+                </unicon>{" "}
+                <unicon name="exchange" width="20" className="unicon exchange">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="inherit"
+                  >
+                    <path d="M18,10a1,1,0,0,0-1-1H5.41l2.3-2.29A1,1,0,0,0,6.29,5.29l-4,4a1,1,0,0,0-.21,1.09A1,1,0,0,0,3,11H17A1,1,0,0,0,18,10Zm3.92,3.62A1,1,0,0,0,21,13H7a1,1,0,0,0,0,2H18.59l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l4-4A1,1,0,0,0,21.92,13.62Z"></path>
+                  </svg>
+                </unicon>
+              </li>
+              {suggestionsfrom &&
+                <ul className="suggestion-list">
+                  {fromSugggestionList.map((item, index) =>
+                    <li onClick={(e) => { selectFromSuggestion(item) }}>
+                      <unicon
+                        name="map-marker"
+                        fill="#7799BE"
+                        width="20"
+                        className="unicon"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="20"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="#7799BE"
+                        >
+                          <path d="M12,2a8,8,0,0,0-8,8c0,5.4,7.05,11.5,7.35,11.76a1,1,0,0,0,1.3,0C13,21.5,20,15.4,20,10A8,8,0,0,0,12,2Zm0,17.65c-2.13-2-6-6.31-6-9.65a6,6,0,0,1,12,0C18,13.34,14.13,17.66,12,19.65ZM12,6a4,4,0,1,0,4,4A4,4,0,0,0,12,6Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,12Z"></path>
+                        </svg>
+                      </unicon>{" "}
+                      <span>{item.name} - {item.code}</span>
+                    </li>
+                  )}
+                </ul>
+              }
+            </div>
+            <div style={{ width: "100%", position: "relative" }}>
+              <li className="navbar-text navbar-inputs search-items px-1">
+                <label>Going to</label>{" "}
+                <input
+                  type="text"
+                  placeholder="City or Airport"
+                  className="form-control"
+                  value={to.name}
+                  onChange={(e) => toAutocomplete(e.target.value)}
+                  id="__BVID__44"
+                />{" "}
+                <unicon
+                  name="map-marker"
                   fill="#7799BE"
+                  width="20"
+                  className="unicon"
                 >
-                  <path d="M12,2a8,8,0,0,0-8,8c0,5.4,7.05,11.5,7.35,11.76a1,1,0,0,0,1.3,0C13,21.5,20,15.4,20,10A8,8,0,0,0,12,2Zm0,17.65c-2.13-2-6-6.31-6-9.65a6,6,0,0,1,12,0C18,13.34,14.13,17.66,12,19.65ZM12,6a4,4,0,1,0,4,4A4,4,0,0,0,12,6Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,12Z"></path>
-                </svg>
-              </unicon>
-            </li>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="#7799BE"
+                  >
+                    <path d="M12,2a8,8,0,0,0-8,8c0,5.4,7.05,11.5,7.35,11.76a1,1,0,0,0,1.3,0C13,21.5,20,15.4,20,10A8,8,0,0,0,12,2Zm0,17.65c-2.13-2-6-6.31-6-9.65a6,6,0,0,1,12,0C18,13.34,14.13,17.66,12,19.65ZM12,6a4,4,0,1,0,4,4A4,4,0,0,0,12,6Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,12Z"></path>
+                  </svg>
+                </unicon>
+              </li>
+
+              {suggestionsTo &&
+
+                <ul className="suggestion-list">
+                  {toSugggestionList.map((item, index) =>
+                    <li onClick={(e) => { selectToSuggestion(item) }}>
+                      <unicon
+                        name="map-marker"
+                        fill="#7799BE"
+                        width="20"
+                        className="unicon"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="20"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="#7799BE"
+                        >
+                          <path d="M12,2a8,8,0,0,0-8,8c0,5.4,7.05,11.5,7.35,11.76a1,1,0,0,0,1.3,0C13,21.5,20,15.4,20,10A8,8,0,0,0,12,2Zm0,17.65c-2.13-2-6-6.31-6-9.65a6,6,0,0,1,12,0C18,13.34,14.13,17.66,12,19.65ZM12,6a4,4,0,1,0,4,4A4,4,0,0,0,12,6Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,12Z"></path>
+                        </svg>
+                      </unicon>{" "}
+                      <span>{item.name} - {item.code}</span>
+                    </li>
+                  )}
+                </ul>
+              }
+            </div>
             <li className="navbar-text search-items px-1 pick-date">
-              <label>Departing</label> <Datedata />
+              <label>Departing</label> <Datedata fromDate={fromDate} setFromDate={setFromDate} />
             </li>
-            {oneway === "roundtrip" && (
+            {type === "roundtrip" && (
               <li className="navbar-text search-items px-1 pick-date">
                 <label>Returing</label>
-                <Returningdate />
+                <Returningdate toDate={toDate} setToDate={setToDate} />
               </li>
             )}
 
@@ -127,7 +238,7 @@ export default function Tabs() {
               <input
                 type="text"
                 readOnly="readOnly"
-                value="1 Traveler, Business"
+                value={`${totalTraveler()} Traveler, Business`}
                 className="bg-white form-control"
                 id="__BVID__50"
                 onClick={() => {
@@ -173,8 +284,10 @@ export default function Tabs() {
                         <select
                           className="form-select adult-setting "
                           id="__BVID__54"
+                          onChange={(event) => setAdults(event.target.value)}
+                          value={adults}
                         >
-                          <option selected="selected" value="1">
+                          <option value="1">
                             1
                           </option>
                           <option value="2">2</option>
@@ -193,8 +306,13 @@ export default function Tabs() {
                         <select
                           className="form-select adult-setting "
                           id="__BVID__55"
+                          onChange={(event) => setChilds(event.target.value)}
+                          value={childs}
                         >
-                          <option selected="selected" value="1">
+                          <option value="0">
+                            0
+                          </option>
+                          <option value="1">
                             1
                           </option>
                           <option value="2">2</option>
@@ -213,8 +331,13 @@ export default function Tabs() {
                         <select
                           className="form-select adult-setting "
                           id="__BVID__56"
+                          onChange={(event) => setInfants(event.target.value)}
+                          value={infants}
                         >
-                          <option selected="selected" value="1">
+                          <option value="0">
+                            0
+                          </option>
+                          <option value="1">
                             1
                           </option>
                           <option value="2">2</option>
@@ -236,8 +359,10 @@ export default function Tabs() {
                         <select
                           className="form-select economny-text "
                           id="__BVID__57"
+                          onChange={(event) => setClassType(event.target.value)}
+                          value={classType}
                         >
-                          <option selected="selected" value="Economy">
+                          <option value="Economy">
                             Economy
                           </option>
                           <option value="Business">Business</option>
@@ -288,267 +413,12 @@ export default function Tabs() {
               <button
                 type="button"
                 className="btn btn-warning"
-                onClick={() => router.push("/listing")}
+                onClick={() => submit()}
               >
                 Search
               </button>
             </li>
           </ul>
-
-          {/* ......................................... city setting */}
-          {oneway === "city" && (
-            <>
-              <ul className="nav align-items-end">
-                <li className="navbar-text search-items px-1 leaving">
-                  <label>Leaving from</label>
-                  <input
-                    type="text"
-                    placeholder="City or Airport"
-                    className="form-control"
-                    id="__BVID__41"
-                  />
-                  <unicon
-                    name="map-marker"
-                    fill="#7799BE"
-                    width="20"
-                    className="unicon"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="#7799BE"
-                    >
-                      <path d="M12,2a8,8,0,0,0-8,8c0,5.4,7.05,11.5,7.35,11.76a1,1,0,0,0,1.3,0C13,21.5,20,15.4,20,10A8,8,0,0,0,12,2Zm0,17.65c-2.13-2-6-6.31-6-9.65a6,6,0,0,1,12,0C18,13.34,14.13,17.66,12,19.65ZM12,6a4,4,0,1,0,4,4A4,4,0,0,0,12,6Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,12Z"></path>
-                    </svg>
-                  </unicon>
-                  <unicon
-                    name="exchange"
-                    width="20"
-                    className="unicon exchange"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="inherit"
-                    >
-                      <path d="M18,10a1,1,0,0,0-1-1H5.41l2.3-2.29A1,1,0,0,0,6.29,5.29l-4,4a1,1,0,0,0-.21,1.09A1,1,0,0,0,3,11H17A1,1,0,0,0,18,10Zm3.92,3.62A1,1,0,0,0,21,13H7a1,1,0,0,0,0,2H18.59l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l4-4A1,1,0,0,0,21.92,13.62Z"></path>
-                    </svg>
-                  </unicon>
-                </li>
-                <li className="navbar-text search-items px-1">
-                  <label>Going to</label>
-                  <input
-                    type="text"
-                    placeholder="City or Airport"
-                    className="form-control"
-                    id="__BVID__44"
-                  />
-                  <unicon
-                    name="map-marker"
-                    fill="#7799BE"
-                    width="20"
-                    className="unicon"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="#7799BE"
-                    >
-                      <path d="M12,2a8,8,0,0,0-8,8c0,5.4,7.05,11.5,7.35,11.76a1,1,0,0,0,1.3,0C13,21.5,20,15.4,20,10A8,8,0,0,0,12,2Zm0,17.65c-2.13-2-6-6.31-6-9.65a6,6,0,0,1,12,0C18,13.34,14.13,17.66,12,19.65ZM12,6a4,4,0,1,0,4,4A4,4,0,0,0,12,6Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,12Z"></path>
-                    </svg>
-                  </unicon>
-                </li>
-                <li className="navbar-text search-items px-1 pick-date">
-                  <label>Departing</label>
-                  <Datedata />
-                </li>
-              </ul>
-
-              <ul className="nav align-items-end">
-                <li className="navbar-text search-items px-1 leaving">
-                  <label>Leaving from</label>
-                  <input
-                    type="text"
-                    placeholder="City or Airport"
-                    className="form-control"
-                    id="__BVID__41"
-                  />
-                  <unicon
-                    name="map-marker"
-                    fill="#7799BE"
-                    width="20"
-                    className="unicon"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="#7799BE"
-                    >
-                      <path d="M12,2a8,8,0,0,0-8,8c0,5.4,7.05,11.5,7.35,11.76a1,1,0,0,0,1.3,0C13,21.5,20,15.4,20,10A8,8,0,0,0,12,2Zm0,17.65c-2.13-2-6-6.31-6-9.65a6,6,0,0,1,12,0C18,13.34,14.13,17.66,12,19.65ZM12,6a4,4,0,1,0,4,4A4,4,0,0,0,12,6Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,12Z"></path>
-                    </svg>
-                  </unicon>
-                  <unicon
-                    name="exchange"
-                    width="20"
-                    className="unicon exchange"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="inherit"
-                    >
-                      <path d="M18,10a1,1,0,0,0-1-1H5.41l2.3-2.29A1,1,0,0,0,6.29,5.29l-4,4a1,1,0,0,0-.21,1.09A1,1,0,0,0,3,11H17A1,1,0,0,0,18,10Zm3.92,3.62A1,1,0,0,0,21,13H7a1,1,0,0,0,0,2H18.59l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l4-4A1,1,0,0,0,21.92,13.62Z"></path>
-                    </svg>
-                  </unicon>
-                </li>
-                <li className="navbar-text search-items px-1">
-                  <label>Going to</label>
-                  <input
-                    type="text"
-                    placeholder="City or Airport"
-                    className="form-control"
-                    id="__BVID__44"
-                  />
-                  <unicon
-                    name="map-marker"
-                    fill="#7799BE"
-                    width="20"
-                    className="unicon"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="#7799BE"
-                    >
-                      <path d="M12,2a8,8,0,0,0-8,8c0,5.4,7.05,11.5,7.35,11.76a1,1,0,0,0,1.3,0C13,21.5,20,15.4,20,10A8,8,0,0,0,12,2Zm0,17.65c-2.13-2-6-6.31-6-9.65a6,6,0,0,1,12,0C18,13.34,14.13,17.66,12,19.65ZM12,6a4,4,0,1,0,4,4A4,4,0,0,0,12,6Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,12Z"></path>
-                    </svg>
-                  </unicon>
-                </li>
-                <li className="navbar-text search-items px-1 pick-date">
-                  <label>Departing</label>
-                  <Datedata />
-                </li>
-              </ul>
-            </>
-          )}
-
-          {/* ..........................city ended */}
-
-          {oneway === "city" ? (
-            <>
-              <div className="multi-city-wrapper  inner-wrapper ">
-                <div className="nav  align-items-center mt-3">
-                  <button
-                    type="button"
-                    style={{ marginRight: "10px" }}
-                    className={`btn  ${
-                      router.pathname === "/listing"
-                        ? "btn-checked"
-                        : "btn-outline-primary"
-                    }   `}
-                  >
-                    <svg
-                      viewBox="0 0 16 16"
-                      width="1em"
-                      height="1em"
-                      focusable="false"
-                      role="img"
-                      aria-label="plus"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="currentColor"
-                      className="bi-plus mr-2 b-icon bi"
-                    >
-                      <g>
-                        <path
-                          fillRule="evenodd"
-                          d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
-                        ></path>
-                      </g>
-                    </svg>
-                    Add More
-                  </button>{" "}
-                  <svg
-                    viewBox="0 0 16 16"
-                    width="1em"
-                    height="1em"
-                    focusable="false"
-                    role="img"
-                    aria-label="info circle"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    className="bi-info-circle ml-2 b-icon bi text-secondary "
-                  >
-                    <g>
-                      <path
-                        fillRule="evenodd"
-                        d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
-                      ></path>
-                      <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"></path>
-                      <circle cx="8" cy="4.5" r="1"></circle>
-                    </g>
-                  </svg>
-                </div>
-              </div>
-              <div className="form-group nav mt-3" style={{ display: "flex" }}>
-                <div className="mr-3 custom-control custom-checkbox">
-                  <input
-                    id="checkbox-1"
-                    type="checkbox"
-                    name="checkbox-1"
-                    value="accepted"
-                    className="custom-control-input"
-                  />
-                  <label htmlFor="checkbox-1" className="custom-control-label">
-                    Non stop flight
-                  </label>
-                </div>{" "}
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="form-group nav mt-3" style={{ display: "flex" }}>
-                <div className="mr-3 custom-control custom-checkbox">
-                  <input
-                    id="checkbox-1"
-                    type="checkbox"
-                    name="checkbox-1"
-                    value="accepted"
-                    className="custom-control-input"
-                  />
-                  <label htmlFor="checkbox-1" className="custom-control-label">
-                    Non stop flight
-                  </label>
-                </div>{" "}
-                <div className="custom-control custom-checkbox">
-                  <input
-                    id="checkbox-2"
-                    type="checkbox"
-                    name="checkbox-2"
-                    value="accepted"
-                    className="custom-control-input  "
-                    style={{ marginLeft: "15px" }}
-                  />
-                  <label htmlFor="checkbox-2" className="custom-control-label ">
-                    Flexible dates <span>± 3</span> days
-                  </label>
-                </div>
-              </div>
-            </>
-          )}
-
-          {/* ............................................................... */}
         </div>
       </Container>
     </div>

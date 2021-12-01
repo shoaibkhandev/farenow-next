@@ -2,6 +2,10 @@ import React from 'react'
 import Detailsmodel from "./detailsmodel";
 import { Box } from '@mui/material';
 export default function list({ direction, name, listingIndex, index, radioName }) {
+    function setDirection(direction) {
+        console.log(direction)
+    }
+
     const [details, setdetails] = React.useState(null);
     return (
         <div>
@@ -75,6 +79,7 @@ export default function list({ direction, name, listingIndex, index, radioName }
                         name={radioName}
                         id={`${name}_${listingIndex}_${index}`}
                         style={{ marginTop: "-2rem" }}
+                        onChange={e => setDirection(direction)}
                     />
                     <label htmlFor={`${name}_${listingIndex}_${index}`}>
                         <div className="row w-100 no-gutters align-items-center">

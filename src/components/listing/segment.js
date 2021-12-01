@@ -41,11 +41,11 @@ export default function Segment({
             >
               <span className="price">
                 {" "}
-                SAR
                 <strong>
                   <em>
                     {" "}
-                    638<em className="decimal">.85</em>
+                    {listing.totalPrice}
+                    {/* <em className="decimal">.85</em> */}
                   </em>
                 </strong>{" "}
                 <small>
