@@ -3,15 +3,16 @@ import { Grid, } from "@mui/material";
 import { useRouter } from "next/router";
 import Detailsmodel from "./detailsmodel";
 import List from "./list";
-
-import { Box } from '@mui/material'
 export default function Segment({
-  listingArr
+  listing,
+  totalPersons,
+  departureDate,
+  returnDate
 }) {
   const router = useRouter();
   return (
     <>
-      {listingArr.map((listing, listingIndex) =>
+      {listing.flights.map((itemListing, listingIndex) =>
         <div className="flight-wrapper">
           <Grid container>
             <Grid
@@ -23,11 +24,11 @@ export default function Segment({
               lg={9}
               xl={9}
             >
-              {listing.directions[0] !== undefined && listing.directions[0].map((direction, index) =>
-                <List direction={direction} name="Departure" radioName="departure0" listingIndex={listingIndex} index={index} />
+              {itemListing.directions[0] !== undefined && itemListing.directions[0].map((direction, index) =>
+                <List direction={direction} date={departureDate} listing={itemListing} name="Departure" radioName="departure0" listingIndex={listingIndex} index={index} />
               )}
-              {listing.directions[1] !== undefined && listing.directions[1].map((direction, index) =>
-                <List direction={direction} name="Return" radioName="return0" listingIndex={listingIndex} index={index} />
+              {itemListing.directions[1] !== undefined && itemListing.directions[1].map((direction, index) =>
+                <List direction={direction} date={returnDate} listing={itemListing} name="Return" radioName="return0" listingIndex={listingIndex} index={index} />
               )}
             </Grid>
             <Grid
@@ -49,7 +50,7 @@ export default function Segment({
                   </em>
                 </strong>{" "}
                 <small>
-                  (For <em>1</em> Person )
+                  (For <em>{totalPersons}</em> Person )
                 </small>
               </span>{" "}
               <a

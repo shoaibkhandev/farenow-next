@@ -11,6 +11,10 @@ export default function Details() {
    const router = useRouter();
 
    const { state } = useSelector(state => state);
+
+   const [departured, setDepartured] = React.useState(state.departured)
+   const [returned, setreturned] = React.useState(state.returned)
+
    console.log(state)
 
    return (
@@ -50,10 +54,10 @@ export default function Details() {
                <div className="row" >
                   <div className="right-side col-md-9" >
                      {/*  booking process started */}
-                     <Speedupsign />
+                     {/* <Speedupsign /> */}
                      {/*  booking process ended */}
                      {/* review started */}
-                     <ReviewFlight />
+                     <ReviewFlight departured={departured} returned={returned} />
                      {/* review ended */}
                      {/* provide started */}
                      <Provide />

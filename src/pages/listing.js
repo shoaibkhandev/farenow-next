@@ -13,7 +13,7 @@ import { Box, CircularProgress } from '@mui/material'
 import { da } from 'date-fns/locale';
 
 export async function getServerSideProps(context) {
-  const { adults, childs, infants, depart_date, return_date, type, from, to, classType } = context.query
+  const { adults, childs, infants, depart_date, return_date, type, from, to, classType, totalPersons } = context.query
 
   const params = {
     legs: [
@@ -31,7 +31,10 @@ export async function getServerSideProps(context) {
     "cabins": [classType],
     "pricing": {
       "currency": "USD"
-    }
+    },
+    totalPersons: totalPersons,
+    departureDate: depart_date,
+    returnDate: return_date
   }
 
   if (type === "roundtrip") {
@@ -56,7 +59,7 @@ export default function Listing({ params }) {
 
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = React.useState(true)
-  const [listingArr, setListingArr] = React.useState([])
+  const [listing, setListing] = React.useState([])
 
   useEffect(() => {
     fetchData()
@@ -65,8 +68,11 @@ export default function Listing({ params }) {
   async function fetchData() {
     try {
       const { data } = await axios.post(`http://localhost:3001/v1/flights/list`, params);
-      setListingArr(data)
+      await setListing(data.data)
+      await setLoading(false)
     } catch (error) {
+      setLoading(false)
+      setListing([])
       console.error(error);
     }
   }
@@ -251,14 +257,16 @@ export default function Listing({ params }) {
                 <CircularProgress />
               </div>}
 
-              {!loading && !listingArr.length && <div className='pannel'>
+              {!loading && !listing.flights.length && <div className='pannel'>
                 No hotels found
               </div>}
 
               {!loading && <Segment
-                listingArr={listingArr}
+                listing={listing}
+                totalPersons={params.totalPersons}
+                departureDate={params.departureDate}
+                returnDate={params.returnDate}
               />}
-
 
             </Col>
           </Row>

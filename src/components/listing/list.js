@@ -4,8 +4,7 @@ import { Box } from '@mui/material';
 import { setDepartured, setReturned } from '@redux/slices/Reducer'
 import { useDispatch } from 'react-redux'
 
-export default function list({ direction, name, listingIndex, index, radioName }) {
-
+export default function list({ itemListing, direction, name, listingIndex, index, radioName, date }) {
     const dispatch = useDispatch()
 
     function setDirection(direction) {
@@ -43,13 +42,13 @@ export default function list({ direction, name, listingIndex, index, radioName }
                                 </unicon>
                                 <span>{name}</span>
                             </div>
-                            <div className="date">Wed, 7 Oct 2020</div>
+                            <div className="date">{date}</div>
                         </li>
                         <li className="navbar-text deaprture-section">
                             <div>
-                                <div className="depart">Lahore</div>
+                                <div className="depart">{direction.fromLocations.name}</div>
                                 <small className="airport">
-                                    Allama Iqbal International Airport
+                                    {direction.fromLocations.code}
                                 </small>
                             </div>
                             <unicon
@@ -72,9 +71,9 @@ export default function list({ direction, name, listingIndex, index, radioName }
                         </li>
                         <li className="navbar-text arrival-section">
                             <div>
-                                <div className="arrival">Dubai</div>
+                                <div className="arrival">{direction.toLocations.name}</div>
                                 <small className="airport">
-                                    Dubai International Airport
+                                    {direction.toLocations.code}
                                 </small>
                             </div>
                         </li>
@@ -99,7 +98,7 @@ export default function list({ direction, name, listingIndex, index, radioName }
                                         <Box src='/static/img/PK.8288519.png' />
                                     </figure>
                                     <div className="airline-name">
-                                        <span>Pakistan International Airlines</span>{" "}
+                                        <span>{itemListing?.airlines?.name}</span>{" "}
                                         <em>PK-303</em>
                                     </div>
                                 </div>
@@ -110,20 +109,19 @@ export default function list({ direction, name, listingIndex, index, radioName }
                                         title="Tooltip directive content"
                                         className="time"
                                     >
-                                        11:00
+                                        {direction.segments[0].departure.substring(11, 16)}
                                     </span>
                                     <div className="info">
                                         <div className="top">
                                             <span className="text-danger">
-                                                <em>1</em>Stop,
+                                                <em>{direction.segments.length}</em> Stop,
                                             </span>{" "}
-                                            <span>Layover</span>{" "}
-                                            <em>19 hrs 35 mins (KHI,PEW)</em>
+                                            {/* <span>Layover</span>{" "}
+                                            <em>19 hrs 35 mins (KHI,PEW)</em> */}
                                         </div>
                                         <div className="sagment-line">
                                             <div className="bottom">
-                                                Duration <span>45</span> hrs <span> 35 </span>{" "}
-                                                mins
+                                                Duration {(direction.segments[0].duration[0] / 60).toFixed(2)} hours
                                             </div>
                                         </div>
                                     </div>
@@ -131,7 +129,7 @@ export default function list({ direction, name, listingIndex, index, radioName }
                                         title="Tooltip directive content"
                                         className="time text-right pr-2"
                                     >
-                                        1:00
+                                        {direction.segments[direction.segments.length - 1].departure.substring(11, 16)}
                                     </span>
                                 </div>
                             </div>
@@ -195,10 +193,10 @@ export default function list({ direction, name, listingIndex, index, radioName }
                                                     <path d="M23,9.32a1.06,1.06,0,0,0-.1-.76,4.93,4.93,0,0,0-6.75-1.8L14,8,9,5.65a1,1,0,0,0-.92,0l-3,1.73a1,1,0,0,0-.5.84,1,1,0,0,0,.46.87l3.3,2.08-1.74,1-4.78.58a1,1,0,0,0-.53,1.75l3.54,3.06a3,3,0,0,0,3.55.44L22.5,9.93A1,1,0,0,0,23,9.32Zm-15.53,7a1,1,0,0,1-1.2-.18L4.37,14.51l2.73-.33a1,1,0,0,0,.38-.13l3.36-1.93a1,1,0,0,0,.5-.85,1,1,0,0,0-.47-.86L7.57,8.32l1.1-.63,5,2.32a1,1,0,0,0,.92,0l2.56-1.48a3,3,0,0,1,3.36.29Z"></path>
                                                 </svg>
                                             </unicon>
-                                            <span>Boing-777-300</span>
+                                            <span> {direction.segments[0].flightNumber} - {direction.segments[0].plane[0]}</span>
                                         </div>
                                     </li>
-                                    <li className="navbar-text">
+                                    {/* <li className="navbar-text">
                                         <div
                                             title=""
                                             data-original-title="Tooltip directive content"
@@ -288,18 +286,18 @@ export default function list({ direction, name, listingIndex, index, radioName }
                                             </unicon>
                                             <span>Mobile</span>
                                         </div>
-                                    </li>
+                                    </li> */}
                                 </ul>
                             </div>
-                            <div className="col-sm-3 col-md-3">
+                            {/* <div className="col-sm-3 col-md-3">
                                 <div className="text-center seats-avil">
                                     <small className="text-danger">2 seats left</small>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </label>
                     {details === index && (
-                        <Detailsmodel details={details} setdetails={setdetails} />
+                        <Detailsmodel direction={direction} details={details} setdetails={setdetails} />
                     )}
                     {details === index && (
                         <div

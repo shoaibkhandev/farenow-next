@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 export const Reducer = createSlice({
   name: "actionState",
   initialState: {
-    departured: {},
-    returned: {}
+    departured: null,
+    returned: null
   },
   reducers: {
     setDepartured: (state, action) => {

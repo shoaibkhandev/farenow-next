@@ -68,7 +68,7 @@ export default function Tabs() {
   }
 
   function submit() {
-    router.push(`/listing?adults=1&childs=0&infants=0&depart_date=${fromDate ? fromDate.toISOString().substring(0, 10) : ''}&return_date=${toDate ? toDate.toISOString().substring(0, 10) : ''}&type=${type}&from=${from.code}&to=${to.code}&classType=${classType}`)
+    router.push(`/listing?adults=1&childs=0&infants=0&depart_date=${fromDate ? fromDate.toISOString().substring(0, 10) : ''}&return_date=${toDate ? toDate.toISOString().substring(0, 10) : ''}&type=${type}&from=${from.code}&to=${to.code}&classType=${classType}&totalPersons=${totalTraveler}`)
   }
 
   return (
