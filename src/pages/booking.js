@@ -126,7 +126,7 @@ export default function Booking() {
             </div>
             <div className="left-side col-md-3">
               {/* trip summery started */}
-              <Tripsummery />
+              {/* <Tripsummery /> */}
               {/* trip summery ended */}
             </div>
           </div>

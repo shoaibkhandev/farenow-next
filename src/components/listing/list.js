@@ -1,13 +1,15 @@
 import React from 'react'
 import Detailsmodel from "./detailsmodel";
 import { Box } from '@mui/material';
-import { setDepartured, setReturned } from '@redux/slices/Reducer'
+import { setDepartured, setReturned, setFlight } from '@redux/slices/Reducer'
 import { useDispatch } from 'react-redux'
 
-export default function list({ itemListing, direction, name, listingIndex, index, radioName, date }) {
+export default function list({ direction, listing, name, listingIndex, index, radioName, date }) {
+    console.log(listing)
     const dispatch = useDispatch()
 
     function setDirection(direction) {
+        dispatch(setFlight(listing))
         if (name === "Departure") {
             dispatch(setDepartured(direction))
         } else {
@@ -95,11 +97,10 @@ export default function list({ itemListing, direction, name, listingIndex, index
                             <div className="airline-detail col-md-12 col-lg-12 col-xl-3">
                                 <div className="airline-info cleafix">
                                     <figure className="mb-0">
-                                        <Box src='/static/img/PK.8288519.png' />
+                                        <Box component="img" src={listing.airlines.thumbnail} />
                                     </figure>
                                     <div className="airline-name">
-                                        <span>{itemListing?.airlines?.name}</span>{" "}
-                                        <em>PK-303</em>
+                                        <span>{listing.airlines.name}</span>{" "}
                                     </div>
                                 </div>
                             </div>

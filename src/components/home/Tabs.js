@@ -6,6 +6,11 @@ import Datedata from "./Date";
 import Returningdate from "./Returningdate";
 import { position } from "stylis";
 import { func } from "prop-types";
+import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import Button from '@mui/material/Button';
+import Alert from '@mui/material/Alert';
 export default function Tabs() {
   const [adults, setAdults] = useState(1)
   const [childs, setChilds] = useState(0)
@@ -21,7 +26,19 @@ export default function Tabs() {
   const [to, setTo] = useState("")
   const [toSugggestionList, settoSugggestionList] = useState([])
   const [suggestionsTo, setsuggestionsTo] = useState(false)
+  const [showToast, setShowToast] = React.useState(false);
+  const [flightErrorMsg, setFlightErrorMsg] = React.useState([]);
   const router = useRouter();
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setShowToast(false)
+  };
 
   async function fromAutocomplete(key) {
     setFrom(key)
@@ -68,12 +85,57 @@ export default function Tabs() {
   }
 
   function submit() {
-    router.push(`/listing?adults=1&childs=0&infants=0&depart_date=${fromDate ? fromDate.toISOString().substring(0, 10) : ''}&return_date=${toDate ? toDate.toISOString().substring(0, 10) : ''}&type=${type}&from=${from.code}&to=${to.code}&classType=${classType}&totalPersons=${totalTraveler}`)
+    setFlightErrorMsg("")
+    if (!from.code) {
+      setFlightErrorMsg("Please enter from location")
+      return setShowToast(true)
+    }
+    if (!to.code) {
+      setFlightErrorMsg("Please enter to location")
+      return setShowToast(true)
+    }
+    if (!fromDate) {
+      setFlightErrorMsg("Please enter departure date")
+      return setShowToast(true)
+    }
+    if (!toDate && type === "roundtrip") {
+      setFlightErrorMsg("Please enter arrival date")
+      return setShowToast(true)
+    }
+    router.push(`/listing?adults=1&childs=0&infants=0&depart_date=${fromDate ? fromDate.toISOString().substring(0, 10) : ''}&return_date=${toDate ? toDate.toISOString().substring(0, 10) : ''}&type=${type}&from=${from.code}&to=${to.code}&classType=${classType}&totalPersons=${totalTraveler()}`)
   }
+
+  const action = (
+    <React.Fragment>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </React.Fragment>
+  );
 
   return (
     <div>
       <Container>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={showToast}
+          autoHideDuration={2000}
+          onClose={handleClose}
+          message={flightErrorMsg}
+          action={action}
+        >
+          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+            {flightErrorMsg}
+          </Alert>
+        </Snackbar>
         <div className="inner-wrapper">
           <Form onChange={(e) => setType(e.target.value)}>
             <div className="mb-3 radio-setting ">

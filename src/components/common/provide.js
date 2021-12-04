@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Collapse from '@mui/material/Collapse';
 
 export default function Provide() {
@@ -26,7 +26,6 @@ export default function Provide() {
                      <option defaultValue>Select</option>
                      <option defaultValue="a">Mr</option>
                      <option defaultValue="b">Miss</option>
-                     <option defaultValue="c">Mrs</option>
                   </select>
                </div>
             </div>
