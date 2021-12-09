@@ -4,10 +4,12 @@ import Speedupsign from '@components/common/speedupsign';
 import ReviewFlight from '@components/common/reviewFlight';
 import Provide from '@components/common/provide';
 import Tripsummery from '@components/common/tripsummery';
-import { Toolbar, } from '@mui/material';
+import { Toolbar, Modal, Box, IconButton, CloseIcon, Alert } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux'
 import Collapse from '@mui/material/Collapse';
+import { number } from 'prop-types';
+import Snackbar from '@mui/material/Snackbar';
 
 function formatName(key) {
    switch (key) {
@@ -20,22 +22,43 @@ function formatName(key) {
    }
 }
 
+
 export default function Details() {
    const router = useRouter();
 
    const { state } = useSelector(state => state);
 
-   console.log(state)
-
    const [departured, setDepartured] = React.useState(state.departured)
    const [returned, setreturned] = React.useState(state.returned)
    const [flight, setflight] = React.useState(state.flight)
+   const [showTicket, setShowTicket] = React.useState(false)
+   const [showSnackbar, setShowSnackbar] = React.useState(false)
+   const [ticketNumber, setTicketNumber] = React.useState("")
+   const handleOpen = () => setShowTicket(true);
+   const handleClose = () => setShowTicket(false);
+
+
+   const handleSnackbarClose = () => {
+      setShowSnackbar(false)
+    };
+
+   const style = {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      width: 400,
+      bgcolor: 'background.paper',
+      border: '2px solid #000',
+      boxShadow: 24,
+      p: 4,
+   };
 
    const totalPassengers = Object.keys(flight.passengerCounts).map(key => {
       return {
          lastName: '',
          firstName: '',
-         passCountry: '',
+         passCountry: 'UA',
          passNumber: Math.floor(Math.random() * 900000),
          birthDate: '',
          gender: '',
@@ -84,16 +107,65 @@ export default function Details() {
 
       try {
          const { data } = await axios.post(`http://localhost:3001/v1/flights/book/`, params);
+         getTicket(data[0].pnr)
          console.log(data)
       } catch (error) {
          console.error(error);
       }
    }
 
+
+   async function getTicket(pnr) {
+      try {
+         const { data } = await axios.get(`http://localhost:3001/v1/flights/ticket?pnr=${pnr}`);
+         console.log(data)
+         setShowTicket(true)
+         setTicketNumber(data[0].ticketNumber)
+      } catch (error) {
+         console.error(error);
+      }
+   }
+
+   async function cancelTicket() {
+      try {
+         const { data } = await axios.get(`http://localhost:3001/v1/flights/cancelTicket?ticketNumber=${ticketNumber}`);
+         setShowTicket(false)
+         setShowSnackbar(true)
+      } catch (error) {
+         console.error(error);
+      }
+   }
+
+   const action = (
+      <React.Fragment>
+         <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+         >
+            <CloseIcon fontSize="small" />
+         </IconButton>
+      </React.Fragment>
+   );
+
    return (
       <>
          <Toolbar />
-         {passengers.gender}
+
+         <Snackbar
+            anchorOrigin={{
+               vertical: 'top',
+               horizontal: 'right',
+            }}
+            open={showSnackbar}
+            onClose={handleSnackbarClose}
+            autoHideDuration={2000}
+            action={action}
+         >
+            <Alert severity="error" sx={{ width: '100%' }}>
+               Ticket has been successfully cancelled
+            </Alert>
+         </Snackbar>
          <div className="detail-wrapper" >
             <div className="bookingsteps" >
                <div className="container" >
@@ -237,6 +309,20 @@ export default function Details() {
                            </div>
                         )}
                      </div>
+
+                     <Modal
+                        open={showTicket}
+                        onClose={handleClose}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                     >
+                        <Box sx={style}>
+                           <p>Congrates your ticket has been successfully created</p>
+
+                           <button type="button" className="btn btn-payment btn-danger btn-lg" onClick={() => cancelTicket()}  >Cancel Ticket</button>
+                        </Box>
+                     </Modal>
+
                      {/* provide ended */}
                      <div className="form-group text-end" ><button type="button" className="btn btn-payment btn-success btn-lg" onClick={() => submit()}  >Continue to Payment</button></div>
                   </div>
