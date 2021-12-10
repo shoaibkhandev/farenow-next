@@ -45,7 +45,7 @@ export default function Segment({
                 <strong>
                   <em>
                     {" "}
-                    {listing.totalPrice}
+                    {itemListing.totalPrice}
                     {/* <em className="decimal">.85</em> */}
                   </em>
                 </strong>{" "}

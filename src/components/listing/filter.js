@@ -1,11 +1,94 @@
-import React from 'react'
-import { Collapse, Box } from '@mui/material';
-export default function Filter() {
+import React, { useEffect } from 'react'
+import { Range } from 'rc-slider';
+import 'rc-slider/assets/index.css';
+
+import { Collapse, Box, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from '@mui/material';
+export default function Filter({ loading, listing, setListing, actualListing, setLoading, airline }) {
     const [stop, setstop] = React.useState(false);
+    const [price, setPrice] = React.useState(false);
     const [flight, setflight] = React.useState(false);
+    const [flight1, setflight1] = React.useState(false);
     const [near, setnear] = React.useState(false);
-    const [airline, setairline] = React.useState(false);
     const [stopover, setstopover] = React.useState(false);
+    const maxPrice = listing.max_prices === undefined ? 0 : Math.round(listing.max_prices)
+    const minPrice = listing.min_prices === undefined ? 0 : Math.round(listing.min_prices)
+
+    // filtration values 
+    const [priceRange, setPriceRange] = React.useState([minPrice, maxPrice]);
+    const [stops, setStops] = React.useState("")
+    const [fromLocation, setFromLocation] = React.useState("")
+    const [toLocation, setToLocation] = React.useState("")
+
+    useEffect(() => {
+        filtration()
+    }, [stops, fromLocation, toLocation])
+
+    const handlePriceChange = (newValue) => {
+        setPriceRange(newValue);
+    };
+
+    const filterPrice = () => {
+        filtration()
+    };
+
+    function filtration() {
+        setLoading(true)
+        const result = actualListing.flights.filter(flight => {
+            let itemPass = true;
+
+            if (fromLocation !== "" && itemPass) {
+                if (flight.directions[0] !== undefined && flight.directions[0][0].from == fromLocation) {
+                    itemPass = true
+                } else {
+                    itemPass = false
+                }
+            }
+
+
+            if (toLocation !== "" && itemPass) {
+                if (flight.directions[1] !== undefined && flight.directions[1][0].to == toLocation) {
+                    itemPass = true
+                } else {
+                    itemPass = false
+                }
+            }
+
+            if (airline !== "" && itemPass) {
+                if (flight.airlines.name == airline) {
+                    itemPass = true
+                } else {
+                    itemPass = false
+                }
+            }
+            if (priceRange.length && itemPass) {
+                if (flight.totalPrice.split(/(\d+)/)[1] >= priceRange[0] && flight.totalPrice.split(/(\d+)/)[1] <= priceRange[1]) {
+                    itemPass = true;
+                } else {
+                    itemPass = false;
+                }
+            }
+            if (stops !== "" & itemPass) {
+                if (flight.directions[0] !== undefined && flight.directions[0].length === parseInt(stops)) {
+                    itemPass = true
+                } else {
+                    itemPass = false
+                }
+            }
+            // if(stops !== "" & itemPass) {
+            //     if (flight.directions[1] !== undefined && flight.directions[1].length === parseInt(stops)) {
+            //         itemPass = true
+            //     } else {
+            //         itemPass = false
+            //     }
+            // }
+            if (itemPass) {
+                return flight;
+            }
+        });
+        setLoading(false)
+        setListing({ ...actualListing, flights: result })
+    }
+
     return (
         <aside>
             <div className="aside-header">
@@ -31,6 +114,7 @@ export default function Filter() {
                                 className="collapsed"
                                 aria-expanded="false"
                                 aria-controls="collapse-price"
+                                onClick={() => setPrice(!price)}
                                 style={{ overflowAnchor: "none" }}
                             >
                                 <unicon name="angle-down" className="unicon">
@@ -53,6 +137,24 @@ export default function Filter() {
                             </a>
                         </li>
                     </ul>
+
+                    <Collapse in={price} timeout="auto" unmountOnExit>
+                        <div className="py-2">
+                            <div className='price-section'>
+                                <p>{priceRange[0]}</p>
+                                <p>{priceRange[1]}</p>
+                            </div>
+                            {!loading &&
+                                <Range
+                                    min={minPrice}
+                                    max={maxPrice}
+                                    value={priceRange}
+                                    onAfterChange={filterPrice}
+                                    onChange={handlePriceChange}
+                                />
+                            }
+                        </div>
+                    </Collapse>
                     <div
                         id="collapse-price"
                         className="py-2 collapse"
@@ -84,8 +186,8 @@ export default function Filter() {
                     <Collapse in={stop} timeout="auto" unmountOnExit>
                         <div className="py-2 ">
                             <ul className="nav align-items-center stops">
-                                <li className="navbar-text col-4 px-1">
-                                    <div className="custom-control custom-radio">
+                                <li onClick={() => setStops("1")} className="navbar-text col-4 px-1">
+                                    <div className={`custom-control custom-radio custom-stops ${stops === '1' ? 'active' : ''}`}>
                                         <label
                                             className="custom-control-label"
                                             htmlFor="__BVID__87"
@@ -93,10 +195,9 @@ export default function Filter() {
                                             Non Stop
                                         </label>
                                     </div>
-                                    SAR 786
                                 </li>
-                                <li className="navbar-text col-4 px-1">
-                                    <div className="custom-control custom-radio">
+                                <li onClick={() => setStops("2")} className="navbar-text col-4 px-1">
+                                    <div className={`custom-control custom-radio custom-stops ${stops === '2' ? 'active' : ''}`}>
                                         <label
                                             className="custom-control-label"
                                             htmlFor="__BVID__88"
@@ -104,18 +205,16 @@ export default function Filter() {
                                             One Stop
                                         </label>
                                     </div>
-                                    SAR 786
                                 </li>
-                                <li className="navbar-text col-4 px-1">
-                                    <div className="custom-control custom-radio">
+                                <li onClick={() => setStops("3")} className="navbar-text col-4 px-1">
+                                    <div className={`custom-control custom-radio custom-stops ${stops === '3' ? 'active' : ''}`}>
                                         <label
                                             className="custom-control-label"
                                             htmlFor="__BVID__89"
                                         >
-                                            Tow Stop
+                                            Two Stop
                                         </label>
                                     </div>
-                                    SAR 786
                                 </li>
                             </ul>
                         </div>
@@ -142,7 +241,7 @@ export default function Filter() {
                                         <path d="M17,9.17a1,1,0,0,0-1.41,0L12,12.71,8.46,9.17a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42l4.24,4.24a1,1,0,0,0,1.42,0L17,10.59A1,1,0,0,0,17,9.17Z"></path>
                                     </svg>
                                 </unicon>
-                                My Flights
+                                From Locations
                             </a>
                         </li>
                         <li className="navbar-text right-side">
@@ -152,19 +251,70 @@ export default function Filter() {
                         </li>
                     </ul>
                     <Collapse in={flight} timeout="auto" unmountOnExit>
-                        <div className="py-2 my-flights ">
-                            <div className="custom-control custom-radio">
-                                <label
-                                    className="custom-control-label"
-                                    htmlFor="__BVID__95"
-                                >
-                                    Bookmarked <span>(0)</span>
-                                </label>
-                            </div>
-                        </div>
+                        <ul className="nav align-items-center stops">
+                            {!loading && Object.keys(listing.fromLocations).map((key, index) => (
+                                <li onClick={() => setFromLocation(key)} className="navbar-text col-4 px-1">
+                                    <div className={`custom-control custom-radio custom-stops ${fromLocation === key ? 'active' : ''}`}>
+                                        <label
+                                            className="custom-control-label"
+                                            htmlFor="__BVID__87"
+                                        >
+                                            {key} - {listing.fromLocations[key].name}
+                                        </label>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
                     </Collapse>
                 </div>
                 <div className="section">
+                    <ul className="nav align-items-center justify-content-between">
+                        <li className="navbar-text left-side">
+                            <a
+                                onClick={() => setflight1(!flight1)}
+                                target="_self"
+                                aria-expanded="false"
+                                aria-controls="collapse-myFlights"
+                                style={{ overflowAnchor: "none" }}
+                            >
+                                <unicon name="angle-down" className="unicon">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="inherit"
+                                    >
+                                        <path d="M17,9.17a1,1,0,0,0-1.41,0L12,12.71,8.46,9.17a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42l4.24,4.24a1,1,0,0,0,1.42,0L17,10.59A1,1,0,0,0,17,9.17Z"></path>
+                                    </svg>
+                                </unicon>
+                                To Locations
+                            </a>
+                        </li>
+                        <li className="navbar-text right-side">
+                            <a href="#" target="_self" className="">
+                                Clear
+                            </a>
+                        </li>
+                    </ul>
+                    <Collapse in={flight1} timeout="auto" unmountOnExit>
+                        <ul className="nav align-items-center stops">
+                            {!loading && Object.keys(listing.toLocations).map((key, index) => (
+                                <li onClick={() => setToLocation(key)} className="navbar-text col-4 px-1">
+                                    <div className={`custom-control custom-radio custom-stops ${toLocation === key ? 'active' : ''}`}>
+                                        <label
+                                            className="custom-control-label"
+                                            htmlFor="__BVID__87"
+                                        >
+                                            {key} - {listing.toLocations[key].name}
+                                        </label>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    </Collapse>
+                </div>
+                {/* <div className="section">
                     <ul className="nav align-items-center justify-content-between">
                         <li className="navbar-text left-side">
                             <a
@@ -440,7 +590,7 @@ export default function Filter() {
                             </ul>
                         </div>
                     </Collapse>
-                </div>
+                </div> */}
             </div>
         </aside>
     )

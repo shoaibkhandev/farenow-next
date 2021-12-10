@@ -2534,7 +2534,6 @@ aside .filter-pannel .section .nav li.right-side a {
 }
 
 aside .filter-pannel .section .stops {
-  justify-content: space-between;
   color: #4092fb;
   font-size: 14px;
   text-align: center;
@@ -2564,7 +2563,13 @@ aside .filter-pannel .section .custom-control-label {
 
 aside .filter-pannel .section .custom-control-label:hover {
   background: #4092fb;
-  color: #fff;
+  color: #fff !important;
+  border-color: #4092fb;
+}
+
+.custom-stops.active .custom-control-label {
+  background: #4092fb;
+  color: #fff !important;
   border-color: #4092fb;
 }
 
@@ -2725,6 +2730,24 @@ aside .filter-pannel .section .airline-tag .airline-img {
   background: #4092fb;
   border-color: #4092fb;
   color: #fff;
+}
+
+.item-airline.active {
+  background: #4092fb;
+  border-color: #4092fb;
+  color: #fff;
+}
+
+.item-airline.active span {
+  color: #fff !important;
+}
+
+.item-airline.active .price {
+  color: #fff !important;
+}
+
+.item-airline.active figure {
+  border-radius: 20px !important;
 }
 
 .flightResultsSortingPanel .item-airline:hover span {
@@ -4984,4 +5007,10 @@ aside .btn-itinerary:hover {
 
 .suggestion-list li:hover {
   background: #e6e6e6;
+}
+
+.price-section {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
 }

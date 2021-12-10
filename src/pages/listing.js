@@ -60,6 +60,8 @@ export default function Listing({ params }) {
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = React.useState(true)
   const [listing, setListing] = React.useState([])
+  const [actualListing, setActualListing] = React.useState([])
+  const [airline, setAirline] = React.useState("")
 
   useEffect(() => {
     fetchData()
@@ -69,12 +71,23 @@ export default function Listing({ params }) {
     try {
       const { data } = await axios.post(`http://localhost:3001/v1/flights/list`, params);
       await setListing(data.data)
+      await setActualListing(data.data)
       await setLoading(false)
     } catch (error) {
       setLoading(false)
       setListing([])
       console.error(error);
     }
+  }
+
+  const changeAirline = (airline) => {
+    setAirline(airline)
+    setLoading(true)
+    const result = actualListing.flights.filter(flight => {
+      if (flight.airlines.name == airline) return flight
+    })
+    setListing({ ...actualListing, flights: result })
+    setLoading(false)
   }
 
   const handleClick = () => {
@@ -126,7 +139,7 @@ export default function Listing({ params }) {
                 <small>(One Way)</small>
               </h4>
               class: <span>Economy</span> Traveller: <span>1</span> Date:{" "}
-              <span>Fri,02 Oct 2020</span> <em>6 Flights Found</em>
+              <span>Fri,02 Oct 2020</span> <em>{!loading && listing.flights.length} Flights Found</em>
             </li>
             <li className="navbar-text right-side">
               <button
@@ -162,19 +175,19 @@ export default function Listing({ params }) {
         <div className="container-fluid">
           <Row>
             <Col md={3}>
-              <Filter />
+              {!loading && <Filter airline={airline} setLoading={setLoading} loading={loading} listing={listing} setListing={setListing} actualListing={actualListing} />}
             </Col>
             <Col md={9}>
               <div className="flightResultsSortingPanel ">
                 <div className="swipper-wrapper">
                   <Slider {...settings}>
-                    {Array.from({ length: 12 }).map((_, idx) => (
-                      <div key={idx} style={{ width: "163.667px" }}>
-                        <div className="item-airline">
+                    {!loading && Object.keys(listing.airLines).map((key, index) => (
+                      <div key={index} style={{ width: "163.667px" }}>
+                        <div onClick={() => changeAirline(listing.airLines[key].name)} className={`item-airline ${airline == listing.airLines[key].name ? 'active' : ''}`}>
                           <a target="_self" className="pia-dcoration">
                             <figure>
                               <Box component="img"
-                                src="/static/img/PK.8288519.png"
+                                src={listing.airLines[key].thumbnail}
                                 width="25px"
                                 height="20px"
                                 className="img-fluid"
@@ -182,13 +195,11 @@ export default function Listing({ params }) {
                             </figure>
                             <div className="item-airline-right">
                               <span className="txtEclipse d-block float-left">
-                                Pakistan International Airlines
+                                {listing.airLines[key].name}
                               </span>{" "}
                               <span className="price">
-                                {" "}
-                                SAR{" "}
                                 <strong className="priceTag">
-                                  <em>668</em> <em className="decimel">.75</em>
+                                  <em>{listing.airLines[key].price}</em>
                                 </strong>
                               </span>
                             </div>

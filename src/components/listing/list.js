@@ -5,7 +5,7 @@ import { setDepartured, setReturned, setFlight } from '@redux/slices/Reducer'
 import { useDispatch } from 'react-redux'
 
 export default function list({ direction, listing, name, listingIndex, index, radioName, date }) {
-    console.log(listing)
+    
     const dispatch = useDispatch()
 
     function setDirection(direction) {

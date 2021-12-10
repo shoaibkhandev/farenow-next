@@ -20,6 +20,7 @@
     "lodash": "^4.17.21",
     "next": "latest",
     "prop-types": "latest",
+    "rc-slider": "^9.7.5",
     "react": "latest",
     "react-bootstrap": "^2.0.2",
     "react-bootstrap-icons": "^1.6.1",
