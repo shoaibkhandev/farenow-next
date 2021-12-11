@@ -13,7 +13,7 @@ import { Box, CircularProgress } from '@mui/material'
 import { da } from 'date-fns/locale';
 
 export async function getServerSideProps(context) {
-  const { adults, childs, infants, depart_date, return_date, type, from, to, classType, totalPersons } = context.query
+  const { adults, childs, infants, depart_date, return_date, type, from, to, classType, totalPersons, from_city, to_city } = context.query
 
   const params = {
     legs: [
@@ -34,7 +34,10 @@ export async function getServerSideProps(context) {
     },
     totalPersons: totalPersons,
     departureDate: depart_date,
-    returnDate: return_date
+    returnDate: return_date,
+    fromCity: from_city,
+    toCity: to_city,
+    classType: classType
   }
 
   if (type === "roundtrip") {
@@ -95,10 +98,10 @@ export default function Listing({ params }) {
   };
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     speed: 500,
     arrows: false,
-    slidesToShow: 6,
+    slidesToShow: 5.2,
     slidesToScroll: 1,
     responsive: [
       {
@@ -135,11 +138,10 @@ export default function Listing({ params }) {
             <li className="navbar-text left-side">
               <h4>
                 {" "}
-                Lahore, Pakistan - Dubai, United Arab Emirates{" "}
-                <small>(One Way)</small>
+                {params.fromCity} - {params.toCity}
               </h4>
-              class: <span>Economy</span> Traveller: <span>1</span> Date:{" "}
-              <span>Fri,02 Oct 2020</span> <em>{!loading && listing.flights.length} Flights Found</em>
+              class: <span>{params.classType}</span> Traveller: <span>{params.totalPersons}</span> Date:{" "}
+              <em>{!loading && listing.flights.length} Flights Found</em>
             </li>
             <li className="navbar-text right-side">
               <button
@@ -174,9 +176,15 @@ export default function Listing({ params }) {
       <div className="flights-wrapper pb-5">
         <div className="container-fluid">
           <Row>
-            <Col md={3}>
-              {!loading && <Filter airline={airline} setLoading={setLoading} loading={loading} listing={listing} setListing={setListing} actualListing={actualListing} />}
-            </Col>
+            {loading && <Col md={3}>
+              <aside>
+                <div className='aside-header'></div>
+                <div className='filter-pannel'></div>
+              </aside>
+            </Col>}
+            {!loading && <Col md={3}>
+              <Filter airline={airline} setLoading={setLoading} loading={loading} listing={listing} setListing={setListing} actualListing={actualListing} />
+            </Col>}
             <Col md={9}>
               <div className="flightResultsSortingPanel ">
                 <div className="swipper-wrapper">
@@ -209,7 +217,7 @@ export default function Listing({ params }) {
                     ))}
                   </Slider>
                 </div>
-                <div className="flightResultsSortingPanel">
+                {/* <div className="flightResultsSortingPanel">
                   <div className="container-fluid ">
                     <ul className="nav sortby">
                       <li className="navbar-text">
@@ -261,7 +269,7 @@ export default function Listing({ params }) {
                       </li>
                     </ul>
                   </div>
-                </div>
+                </div> */}
               </div>
 
               {loading && <div className='pannel'>

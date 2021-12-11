@@ -59,7 +59,7 @@ export default function Segment({
               >
                 Book Now
               </a>
-              <div title="Tooltip directive content" className="reward ">
+              {/* <div title="Tooltip directive content" className="reward ">
                 <svg
                   viewBox="0 0 16 16"
                   width="1em"
@@ -81,7 +81,7 @@ export default function Segment({
                   </g>
                 </svg>
                 <span>Earn 42 Flyin Reward Points</span>
-              </div>
+              </div> */}
             </Grid>
           </Grid>
         </div>

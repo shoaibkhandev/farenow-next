@@ -50,7 +50,7 @@ export default function Detailsmodel({ direction, details, setdetails }) {
                 <span>{direction.toLocations.name}</span>
               </li>
               <li className="navbar-text">
-                Duration : {direction.segments[0].duration[0] / 60} hours
+                Duration : {(direction.segments[0].duration[0] / 60).toFixed(2)} hours
               </li>
             </ul>
           </div>

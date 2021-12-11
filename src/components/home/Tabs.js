@@ -102,7 +102,7 @@ export default function Tabs() {
       setFlightErrorMsg("Please enter arrival date")
       return setShowToast(true)
     }
-    router.push(`/listing?adults=1&childs=0&infants=0&depart_date=${fromDate ? fromDate.toISOString().substring(0, 10) : ''}&return_date=${toDate ? toDate.toISOString().substring(0, 10) : ''}&type=${type}&from=${from.code}&to=${to.code}&classType=${classType}&totalPersons=${totalTraveler()}`)
+    router.push(`/listing?adults=1&childs=0&infants=0&depart_date=${fromDate ? fromDate.toISOString().substring(0, 10) : ''}&return_date=${toDate ? toDate.toISOString().substring(0, 10) : ''}&type=${type}&from=${from.code}&to=${to.code}&classType=${classType}&totalPersons=${totalTraveler()}&from_city=${from.city_name}&to_city=${to.city_name}`)
   }
 
   const action = (

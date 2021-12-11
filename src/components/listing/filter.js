@@ -3,7 +3,7 @@ import { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
 import { Collapse, Box, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from '@mui/material';
-export default function Filter({ loading, listing, setListing, actualListing, setLoading, airline }) {
+export default function Filter({ loading, listing, setListing, actualListing, setLoading, airline, setAirline }) {
     const [stop, setstop] = React.useState(false);
     const [price, setPrice] = React.useState(false);
     const [flight, setflight] = React.useState(false);
@@ -15,13 +15,14 @@ export default function Filter({ loading, listing, setListing, actualListing, se
 
     // filtration values 
     const [priceRange, setPriceRange] = React.useState([minPrice, maxPrice]);
-    const [stops, setStops] = React.useState("")
-    const [fromLocation, setFromLocation] = React.useState("")
-    const [toLocation, setToLocation] = React.useState("")
+    const [stops, setStops] = React.useState([])
+    const [fromLocation, setFromLocation] = React.useState([])
+    const [toLocation, setToLocation] = React.useState([])
 
     useEffect(() => {
         filtration()
-    }, [stops, fromLocation, toLocation])
+        console.log(airline)
+    }, [stops, fromLocation, toLocation, setAirline])
 
     const handlePriceChange = (newValue) => {
         setPriceRange(newValue);
@@ -31,22 +32,52 @@ export default function Filter({ loading, listing, setListing, actualListing, se
         filtration()
     };
 
+    const changeStop = (stop) => {
+        if (stops.includes(stop)) {
+            const result = stops.filter(val => val !== stop)
+            return setStops(result)
+        }
+        setStops([...stops, stop]);
+    }
+
+    const changeFromLocation = (code) => {
+        if (fromLocation.includes(code)) {
+            const result = fromLocation.filter(val => val !== code)
+            return setFromLocation(result)
+        }
+        setFromLocation([...fromLocation, code]);
+    }
+
+    const changeToLocation = (code) => {
+        if (toLocation.includes(code)) {
+            const result = toLocation.filter(val => val !== code)
+            return setToLocation(result)
+        }
+        setToLocation([...toLocation, code]);
+    }
+
+    const resetFilters = () => {
+        setPriceRange([minPrice, maxPrice]);
+        setStops([])
+        setFromLocation([])
+        setToLocation([])
+    }
+
     function filtration() {
         setLoading(true)
         const result = actualListing.flights.filter(flight => {
             let itemPass = true;
 
-            if (fromLocation !== "" && itemPass) {
-                if (flight.directions[0] !== undefined && flight.directions[0][0].from == fromLocation) {
+            if (fromLocation.length && itemPass) {
+                if (flight.directions[0] !== undefined && fromLocation.includes(flight.directions[0][0].from)) {
                     itemPass = true
                 } else {
                     itemPass = false
                 }
             }
 
-
-            if (toLocation !== "" && itemPass) {
-                if (flight.directions[1] !== undefined && flight.directions[1][0].to == toLocation) {
+            if (toLocation.length && itemPass) {
+                if (flight.directions[0] !== undefined && toLocation.includes(flight.directions[0][0].to)) {
                     itemPass = true
                 } else {
                     itemPass = false
@@ -60,6 +91,7 @@ export default function Filter({ loading, listing, setListing, actualListing, se
                     itemPass = false
                 }
             }
+
             if (priceRange.length && itemPass) {
                 if (flight.totalPrice.split(/(\d+)/)[1] >= priceRange[0] && flight.totalPrice.split(/(\d+)/)[1] <= priceRange[1]) {
                     itemPass = true;
@@ -67,20 +99,15 @@ export default function Filter({ loading, listing, setListing, actualListing, se
                     itemPass = false;
                 }
             }
-            if (stops !== "" & itemPass) {
-                if (flight.directions[0] !== undefined && flight.directions[0].length === parseInt(stops)) {
+
+            if (stops.length && itemPass) {
+                if (flight.directions[0] !== undefined && stops.includes(flight.directions[0].length)) {
                     itemPass = true
                 } else {
                     itemPass = false
                 }
             }
-            // if(stops !== "" & itemPass) {
-            //     if (flight.directions[1] !== undefined && flight.directions[1].length === parseInt(stops)) {
-            //         itemPass = true
-            //     } else {
-            //         itemPass = false
-            //     }
-            // }
+
             if (itemPass) {
                 return flight;
             }
@@ -98,8 +125,8 @@ export default function Filter({ loading, listing, setListing, actualListing, se
                         <span>to narrow down your search</span>
                     </li>
                     <li className="navbar-text right-side">
-                        <button type="button" className="btn btn-outline-info">
-                            Rest
+                        <button onClick={() => resetFilters()} type="button" className="btn btn-outline-info">
+                            Reset
                         </button>
                     </li>
                 </ul>
@@ -186,8 +213,8 @@ export default function Filter({ loading, listing, setListing, actualListing, se
                     <Collapse in={stop} timeout="auto" unmountOnExit>
                         <div className="py-2 ">
                             <ul className="nav align-items-center stops">
-                                <li onClick={() => setStops("1")} className="navbar-text col-4 px-1">
-                                    <div className={`custom-control custom-radio custom-stops ${stops === '1' ? 'active' : ''}`}>
+                                <li onClick={() => changeStop(1)} className="navbar-text col-4 px-1">
+                                    <div className={`custom-control custom-radio custom-stops ${stops.includes(1) ? 'active' : ''}`}>
                                         <label
                                             className="custom-control-label"
                                             htmlFor="__BVID__87"
@@ -196,8 +223,8 @@ export default function Filter({ loading, listing, setListing, actualListing, se
                                         </label>
                                     </div>
                                 </li>
-                                <li onClick={() => setStops("2")} className="navbar-text col-4 px-1">
-                                    <div className={`custom-control custom-radio custom-stops ${stops === '2' ? 'active' : ''}`}>
+                                <li onClick={() => changeStop(2)} className="navbar-text col-4 px-1">
+                                    <div className={`custom-control custom-radio custom-stops ${stops.includes(2) ? 'active' : ''}`}>
                                         <label
                                             className="custom-control-label"
                                             htmlFor="__BVID__88"
@@ -206,8 +233,8 @@ export default function Filter({ loading, listing, setListing, actualListing, se
                                         </label>
                                     </div>
                                 </li>
-                                <li onClick={() => setStops("3")} className="navbar-text col-4 px-1">
-                                    <div className={`custom-control custom-radio custom-stops ${stops === '3' ? 'active' : ''}`}>
+                                <li onClick={() => changeStop(3)} className="navbar-text col-4 px-1">
+                                    <div className={`custom-control custom-radio custom-stops ${stops.includes(3) ? 'active' : ''}`}>
                                         <label
                                             className="custom-control-label"
                                             htmlFor="__BVID__89"
@@ -253,8 +280,8 @@ export default function Filter({ loading, listing, setListing, actualListing, se
                     <Collapse in={flight} timeout="auto" unmountOnExit>
                         <ul className="nav align-items-center stops">
                             {!loading && Object.keys(listing.fromLocations).map((key, index) => (
-                                <li onClick={() => setFromLocation(key)} className="navbar-text col-4 px-1">
-                                    <div className={`custom-control custom-radio custom-stops ${fromLocation === key ? 'active' : ''}`}>
+                                <li onClick={() => changeFromLocation(key)} className="navbar-text col-4 px-1">
+                                    <div className={`custom-control custom-radio custom-stops ${fromLocation.includes(key) ? 'active' : ''}`}>
                                         <label
                                             className="custom-control-label"
                                             htmlFor="__BVID__87"
@@ -300,8 +327,8 @@ export default function Filter({ loading, listing, setListing, actualListing, se
                     <Collapse in={flight1} timeout="auto" unmountOnExit>
                         <ul className="nav align-items-center stops">
                             {!loading && Object.keys(listing.toLocations).map((key, index) => (
-                                <li onClick={() => setToLocation(key)} className="navbar-text col-4 px-1">
-                                    <div className={`custom-control custom-radio custom-stops ${toLocation === key ? 'active' : ''}`}>
+                                <li onClick={() => changeToLocation(key)} className="navbar-text col-4 px-1">
+                                    <div className={`custom-control custom-radio custom-stops ${toLocation.includes(key) ? 'active' : ''}`}>
                                         <label
                                             className="custom-control-label"
                                             htmlFor="__BVID__87"
