@@ -43,12 +43,14 @@ export default function list({ selectDirection, direction, listing, name, listin
                             <div className="date">{date}</div>
                         </li>
                         <li className="navbar-text deaprture-section">
-                            <div>
-                                <div className="depart">{direction.fromLocations.name}</div>
-                                <small className="airport">
-                                    {direction.fromLocations.code}
-                                </small>
-                            </div>
+                            {direction.fromLocations !== null &&
+                                <div>
+                                    <div className="depart">{direction.fromLocations.name}</div>
+                                    <small className="airport">
+                                        {direction.fromLocations.code}
+                                    </small>
+                                </div>
+                            }
                             <unicon
                                 name="plane-fly"
                                 fill="#203152"
@@ -68,12 +70,12 @@ export default function list({ selectDirection, direction, listing, name, listin
                             </unicon>
                         </li>
                         <li className="navbar-text arrival-section">
-                            <div>
+                            {direction.toLocations !== null && <div>
                                 <div className="arrival">{direction.toLocations.name}</div>
                                 <small className="airport">
                                     {direction.toLocations.code}
                                 </small>
-                            </div>
+                            </div>}
                         </li>
                     </ul>
                 </div>

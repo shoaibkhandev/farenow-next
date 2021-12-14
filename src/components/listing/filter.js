@@ -281,14 +281,16 @@ export default function Filter({ loading, listing, setListing, actualListing, se
                         <ul className="nav align-items-center stops">
                             {!loading && Object.keys(listing.fromLocations).map((key, index) => (
                                 <li onClick={() => changeFromLocation(key)} className="navbar-text col-4 px-1">
-                                    <div className={`custom-control custom-radio custom-stops ${fromLocation.includes(key) ? 'active' : ''}`}>
-                                        <label
-                                            className="custom-control-label"
-                                            htmlFor="__BVID__87"
-                                        >
-                                            {key} - {listing.fromLocations[key].name}
-                                        </label>
-                                    </div>
+                                    {listing.fromLocations[key] !== null &&
+                                        <div className={`custom-control custom-radio custom-stops ${fromLocation.includes(key) ? 'active' : ''}`}>
+                                            <label
+                                                className="custom-control-label"
+                                                htmlFor="__BVID__87"
+                                            >
+                                                {key} - {listing.fromLocations[key].name}
+                                            </label>
+                                        </div>
+                                    }
                                 </li>
                             ))}
                         </ul>
@@ -328,14 +330,15 @@ export default function Filter({ loading, listing, setListing, actualListing, se
                         <ul className="nav align-items-center stops">
                             {!loading && Object.keys(listing.toLocations).map((key, index) => (
                                 <li onClick={() => changeToLocation(key)} className="navbar-text col-4 px-1">
-                                    <div className={`custom-control custom-radio custom-stops ${toLocation.includes(key) ? 'active' : ''}`}>
-                                        <label
-                                            className="custom-control-label"
-                                            htmlFor="__BVID__87"
-                                        >
-                                            {key} - {listing.toLocations[key].name}
-                                        </label>
-                                    </div>
+                                    {listing.toLocations[key] !== null &&
+                                        <div className={`custom-control custom-radio custom-stops ${toLocation.includes(key) ? 'active' : ''}`}>
+                                            <label
+                                                className="custom-control-label"
+                                                htmlFor="__BVID__87"
+                                            >
+                                                {key} - {listing.toLocations[key].name}
+                                            </label>
+                                        </div>}
                                 </li>
                             ))}
                         </ul>
