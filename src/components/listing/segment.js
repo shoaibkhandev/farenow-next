@@ -1,15 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Grid, } from "@mui/material";
 import { useRouter } from "next/router";
 import Detailsmodel from "./detailsmodel";
 import List from "./list";
+import { setSegments } from '@redux/slices/Reducer'
+import { useDispatch } from 'react-redux'
 export default function Segment({
   listing,
   totalPersons,
   departureDate,
   returnDate
 }) {
+  const dispatch = useDispatch()
   const router = useRouter();
+  const [segment, setSegment] = useState([])
+
+  function selectDirection(data) {
+    let seg = [...segment]
+    seg.push(data)
+    setSegment(seg)
+    dispatch(setSegments(seg))
+  }
+
   return (
     <>
       {listing.flights.map((itemListing, listingIndex) =>
@@ -24,11 +36,10 @@ export default function Segment({
               lg={9}
               xl={9}
             >
-              {itemListing.directions[0] !== undefined && itemListing.directions[0].map((direction, index) =>
-                <List direction={direction} date={departureDate} listing={itemListing} name="Departure" radioName="departure0" listingIndex={listingIndex} index={index} />
-              )}
-              {itemListing.directions[1] !== undefined && itemListing.directions[1].map((direction, index) =>
-                <List direction={direction} date={returnDate} listing={itemListing} name="Return" radioName="return0" listingIndex={listingIndex} index={index} />
+              {itemListing.directions.map((listingArr, index) =>
+                listingArr.map((direction, directionIndex) =>
+                  <List selectDirection={selectDirection} direction={direction} date={departureDate} listing={itemListing} name={direction.from + " - " + direction.to} radioName={`departure${index}`} listingIndex={listingIndex} index={directionIndex} />
+                )
               )}
             </Grid>
             <Grid

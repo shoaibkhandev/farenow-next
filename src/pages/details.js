@@ -11,6 +11,11 @@ import Collapse from '@mui/material/Collapse';
 import { number } from 'prop-types';
 import Snackbar from '@mui/material/Snackbar';
 
+import TextField from '@mui/material/TextField';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DatePicker from '@mui/lab/DatePicker';
+
 function formatName(key) {
    switch (key) {
       case 'ADT':
@@ -28,7 +33,7 @@ export default function Details() {
 
    const { state } = useSelector(state => state);
 
-   const [departured, setDepartured] = React.useState(state.departured)
+   const [segments, setSegments] = React.useState(state.segments)
    const [returned, setreturned] = React.useState(state.returned)
    const [flight, setflight] = React.useState(state.flight)
    const [showTicket, setShowTicket] = React.useState(false)
@@ -37,10 +42,12 @@ export default function Details() {
    const handleOpen = () => setShowTicket(true);
    const handleClose = () => setShowTicket(false);
 
+   console.log(segments)
+   console.log(flight)
 
    const handleSnackbarClose = () => {
       setShowSnackbar(false)
-    };
+   };
 
    const style = {
       position: 'absolute',
@@ -91,15 +98,10 @@ export default function Details() {
          deliveryInformation,
          allowWaitlist: true,
       };
-
-      if (departured && returned) {
-         params.segments = [...departured.segments, ...returned.segments]
-      }
-      else if (departured) {
-         params.segments = [...departured.segments]
-      }
-      else if (returned) {
-         params.segments = [...returned.segments]
+      if (segments.length) {
+         segments.map(segment => {
+            params.segments.push(segment.segments)
+         })
       }
 
       console.log(params)
@@ -203,7 +205,7 @@ export default function Details() {
                      {/* <Speedupsign /> */}
                      {/*  booking process ended */}
                      {/* review started */}
-                     <ReviewFlight departured={departured} returned={returned} />
+                     <ReviewFlight segments={segments} />
                      {/* review ended */}
                      {/* provide started */}
                      <div className="content-wrapper traveller-details" >
@@ -299,10 +301,41 @@ export default function Details() {
                                        }} placeholder="Please provide last name" defaultValue="" className="form-control" id="__BVID__44" /></div>
                                     </div>
                                     <div className="col-md-4" >
-                                       <div className="form-group" ><label >Birth Date <span className="text-danger" >*</span></label> <input type="text" onChange={(e) => {
-                                          item.birthDate = e.target.value;
-                                          setPassengers([...passengers])
-                                       }} placeholder="1990-01-30" defaultValue="" className="form-control" id="__BVID__45" /></div>
+                                       <div className="form-group" ><label >Birth Date <span className="text-danger" >*</span></label>
+                                          <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                             <DatePicker
+                                                value={item.birthDate}
+                                                onChange={(newValue) => {
+                                                   [
+                                                      item.birthDate = newValue,
+                                                      setPassengers([...passengers])
+                                                   ]
+                                                }}
+                                                renderInput={(params) =>
+                                                   <TextField {...params}
+                                                      views={['day', 'month', 'year']}
+                                                      maxDate={new Date()}
+                                                      placeholder="1990-01-30"
+                                                      size="small"
+                                                      fullWidth sx={{
+                                                         "& .MuiOutlinedInput-input": {
+                                                            height: "27px",
+                                                         },
+                                                         "& .MuiOutlinedInput-root": {
+                                                            color: "#4D6F93 !important",
+                                                            background: "white",
+                                                         },
+                                                         "& .MuiSvgIcon-root": {
+                                                            color: "#4D6F93 !important",
+                                                         },
+                                                         "& .MuiOutlinedInput-notchedOutline": {
+                                                            top: "0px"
+                                                         },
+
+                                                      }} />}
+                                             />
+                                          </LocalizationProvider>
+                                       </div>
                                     </div>
                                  </div>
                               </form>

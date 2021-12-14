@@ -3,7 +3,7 @@ import FlightListItem from "./flighListItem";
 import { Box } from "@mui/material";
 import Collapse from "@mui/material/Collapse";
 
-export default function Review({ departured, returned }) {
+export default function Review({ segments }) {
   const [open, setOpen] = React.useState(false);
   const [detail, setdetail] = React.useState(true);
 
@@ -15,8 +15,9 @@ export default function Review({ departured, returned }) {
           <h4>Review your flight</h4>
         </div>
         <div className="review-flight" >
-          {departured && <FlightListItem item={departured} />}
-          {returned && <FlightListItem item={returned} />}
+          {segments.length && segments.map(segment => (
+            <FlightListItem item={segment} />
+          ))}
         </div>
         <div className="important-info" >
           <svg

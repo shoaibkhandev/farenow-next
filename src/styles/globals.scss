@@ -761,6 +761,10 @@ label {
     width: 100%;
   }
 
+  .dynamic-forms {
+    max-width: 100% !important;
+  }
+
   .search-items.leaving {
     padding-right: 0 !important;
   }
@@ -5013,4 +5017,32 @@ aside .btn-itinerary:hover {
   display: flex;
   justify-content: space-between;
   font-size: 12px;
+}
+
+.dynamic-forms {
+  max-width: 61%;
+}
+
+.add-more {
+  display: inline-flex;
+  border: 1px solid #cad6e3;
+  border-radius: 3px;
+  color: #21aa29;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 400;
+  transition: all 0.2s ease 0s;
+  background: transparent;
+  padding: 8px 12px;
+  margin: 8px 0px 0px 4px;
+}
+
+.close-more {
+  background: #fff;
+  padding: 5px 6px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  text-align: center;
+  cursor: pointer;
 }

@@ -1,20 +1,16 @@
 import React from 'react'
 import Detailsmodel from "./detailsmodel";
 import { Box } from '@mui/material';
-import { setDepartured, setReturned, setFlight } from '@redux/slices/Reducer'
+import { setSegments, setFlight } from '@redux/slices/Reducer'
 import { useDispatch } from 'react-redux'
 
-export default function list({ direction, listing, name, listingIndex, index, radioName, date }) {
-    
+export default function list({ selectDirection, direction, listing, name, listingIndex, index, radioName, date }) {
+
     const dispatch = useDispatch()
 
     function setDirection(direction) {
         dispatch(setFlight(listing))
-        if (name === "Departure") {
-            dispatch(setDepartured(direction))
-        } else {
-            dispatch(setReturned(direction))
-        }
+        selectDirection(direction)
     }
 
     const [details, setdetails] = React.useState(null);
@@ -197,104 +193,8 @@ export default function list({ direction, listing, name, listingIndex, index, ra
                                             <span> {direction.segments[0].flightNumber} - {direction.segments[0].plane[0]}</span>
                                         </div>
                                     </li>
-                                    {/* <li className="navbar-text">
-                                        <div
-                                            title=""
-                                            data-original-title="Tooltip directive content"
-                                        >
-                                            <unicon
-                                                name="plug"
-                                                fill="#02AE79"
-                                                width="18"
-                                                height="18"
-                                                className="unicon"
-                                            >
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="18"
-                                                    height="18"
-                                                    viewBox="0 0 24 24"
-                                                    fill="#02AE79"
-                                                >
-                                                    <path d="M19,6H16V3a1,1,0,0,0-2,0V6H10V3A1,1,0,0,0,8,3V6H5A1,1,0,0,0,5,8H6v5a1,1,0,0,0,.29.71L9,16.41V21a1,1,0,0,0,2,0V17h2v4a1,1,0,0,0,2,0V16.41l2.71-2.7A1,1,0,0,0,18,13V8h1a1,1,0,0,0,0-2Zm-3,6.59L13.59,15H10.41L8,12.59V8h8ZM11,13h2a1,1,0,0,0,0-2H11a1,1,0,0,0,0,2Z"></path>
-                                                </svg>
-                                            </unicon>
-                                            <span>Power</span>
-                                        </div>
-                                    </li>
-                                    <li className="navbar-text">
-                                        <div title="Tooltip directive content">
-                                            <unicon
-                                                name="wifi"
-                                                fill="#02AE79"
-                                                width="18"
-                                                height="18"
-                                                className="unicon"
-                                            >
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="18"
-                                                    height="18"
-                                                    viewBox="0 0 24 24"
-                                                    fill="#02AE79"
-                                                >
-                                                    <path d="M12,15a3,3,0,1,0,3,3A3,3,0,0,0,12,15Zm0,4a1,1,0,1,1,1-1A1,1,0,0,1,12,19Zm0-8a7.06,7.06,0,0,0-4.95,2.05,1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0,5,5,0,0,1,7.08,0,1,1,0,0,0,.7.3A1,1,0,0,0,17,13.05,7.06,7.06,0,0,0,12,11Zm0-4a11.08,11.08,0,0,0-7.78,3.22,1,1,0,0,0,1.42,1.42,9,9,0,0,1,12.72,0,1,1,0,0,0,.71.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.42A11.08,11.08,0,0,0,12,7Zm10.61.39a15,15,0,0,0-21.22,0A1,1,0,0,0,2.81,8.81a13,13,0,0,1,18.38,0,1,1,0,0,0,1.42,0A1,1,0,0,0,22.61,7.39Z"></path>
-                                                </svg>
-                                            </unicon>
-                                            <span>Wifi</span>
-                                        </div>
-                                    </li>
-                                    <li className="navbar-text">
-                                        <div title="Tooltip directive content">
-                                            <unicon
-                                                name="airplay"
-                                                fill="#02AE79"
-                                                width="18"
-                                                height="18"
-                                                className="unicon"
-                                            >
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="18"
-                                                    height="18"
-                                                    viewBox="0 0 24 24"
-                                                    fill="#02AE79"
-                                                >
-                                                    <path d="M12.83,13.45a1,1,0,0,0-1.66,0l-4,6a1,1,0,0,0,0,1A1,1,0,0,0,8,21h8a1,1,0,0,0,.88-.53,1,1,0,0,0-.05-1ZM9.87,19,12,15.8,14.13,19ZM19,3H5A3,3,0,0,0,2,6v9a3,3,0,0,0,3,3h.85a1,1,0,1,0,0-2H5a1,1,0,0,1-1-1V6A1,1,0,0,1,5,5H19a1,1,0,0,1,1,1v9a1,1,0,0,1-1,1h-.85a1,1,0,0,0,0,2H19a3,3,0,0,0,3-3V6A3,3,0,0,0,19,3Z"></path>
-                                                </svg>
-                                            </unicon>
-                                            <span>Seatback TV</span>
-                                        </div>
-                                    </li>
-                                    <li className="navbar-text">
-                                        <div title="Tooltip directive content">
-                                            <unicon
-                                                name="mobile-android"
-                                                fill="#02AE79"
-                                                width="18"
-                                                height="18"
-                                                className="unicon"
-                                            >
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="18"
-                                                    height="18"
-                                                    viewBox="0 0 24 24"
-                                                    fill="#02AE79"
-                                                >
-                                                    <path d="M12.71,16.29l-.15-.12a.76.76,0,0,0-.18-.09L12.2,16a1,1,0,0,0-.91.27,1.15,1.15,0,0,0-.21.33,1,1,0,0,0,1.3,1.31,1.46,1.46,0,0,0,.33-.22,1,1,0,0,0,.21-1.09A1,1,0,0,0,12.71,16.29ZM16,2H8A3,3,0,0,0,5,5V19a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V5A3,3,0,0,0,16,2Zm1,17a1,1,0,0,1-1,1H8a1,1,0,0,1-1-1V5A1,1,0,0,1,8,4h8a1,1,0,0,1,1,1Z"></path>
-                                                </svg>
-                                            </unicon>
-                                            <span>Mobile</span>
-                                        </div>
-                                    </li> */}
                                 </ul>
                             </div>
-                            {/* <div className="col-sm-3 col-md-3">
-                                <div className="text-center seats-avil">
-                                    <small className="text-danger">2 seats left</small>
-                                </div>
-                            </div> */}
                         </div>
                     </label>
                     {details === index && (

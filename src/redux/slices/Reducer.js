@@ -3,16 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 export const Reducer = createSlice({
   name: "actionState",
   initialState: {
-    departured: null,
-    returned: null,
+    segments: [],
     flight: null
   },
   reducers: {
-    setDepartured: (state, action) => {
-      state.departured = action.payload;
-    },
-    setReturned: (state, action) => {
-      state.returned = action.payload;
+    setSegments: (state, action) => {
+      state.segments = action.payload;
     },
     setFlight: (state, action) => {
       state.flight = action.payload;
@@ -21,6 +17,6 @@ export const Reducer = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setDepartured, setReturned, setFlight } = Reducer.actions;
+export const { setSegments, setFlight } = Reducer.actions;
 
 export default Reducer.reducer;
