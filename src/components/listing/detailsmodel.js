@@ -45,10 +45,10 @@ export default function Detailsmodel({ direction, details, setdetails }) {
           </div>
           <div className="info-tag">
             <ul className="nav dd">
-              <li className="navbar-text">
+              {/* <li className="navbar-text">
                 Departure : <span>{direction.fromLocations.name}</span> -{" "}
                 <span>{direction.toLocations.name}</span>
-              </li>
+              </li> */}
               <li className="navbar-text">
                 Duration : {(direction.segments[0].duration[0] / 60).toFixed(2)} hours
               </li>

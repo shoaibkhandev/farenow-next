@@ -277,7 +277,7 @@ export default function Filter({ loading, listing, setListing, actualListing, se
                             </a>
                         </li>
                     </ul>
-                    <Collapse in={flight} timeout="auto" unmountOnExit>
+                    {/* <Collapse in={flight} timeout="auto" unmountOnExit>
                         <ul className="nav align-items-center stops">
                             {!loading && Object.keys(listing.fromLocations).map((key, index) => (
                                 <li onClick={() => changeFromLocation(key)} className="navbar-text col-4 px-1">
@@ -294,7 +294,7 @@ export default function Filter({ loading, listing, setListing, actualListing, se
                                 </li>
                             ))}
                         </ul>
-                    </Collapse>
+                    </Collapse> */}
                 </div>
                 <div className="section">
                     <ul className="nav align-items-center justify-content-between">
@@ -326,7 +326,7 @@ export default function Filter({ loading, listing, setListing, actualListing, se
                             </a>
                         </li>
                     </ul>
-                    <Collapse in={flight1} timeout="auto" unmountOnExit>
+                    {/* <Collapse in={flight1} timeout="auto" unmountOnExit>
                         <ul className="nav align-items-center stops">
                             {!loading && Object.keys(listing.toLocations).map((key, index) => (
                                 <li onClick={() => changeToLocation(key)} className="navbar-text col-4 px-1">
@@ -342,7 +342,7 @@ export default function Filter({ loading, listing, setListing, actualListing, se
                                 </li>
                             ))}
                         </ul>
-                    </Collapse>
+                    </Collapse> */}
                 </div>
                 {/* <div className="section">
                     <ul className="nav align-items-center justify-content-between">

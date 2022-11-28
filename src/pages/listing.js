@@ -3337,7 +3337,7 @@ export default function Listing({ params }) {
             <Col md={9}>
               <div className="flightResultsSortingPanel ">
                 <div className="swipper-wrapper">
-                  <Slider {...settings}>
+                  {/* <Slider {...settings}>
                     {!loading && Object.keys(listing.airLines).map((key, index) => (
                       <div key={index} style={{ width: "163.667px" }}>
                         <div onClick={() => changeAirline(listing.airLines[key].name)} className={`item-airline ${airline == listing.airLines[key].name ? 'active' : ''}`}>
@@ -3364,7 +3364,7 @@ export default function Listing({ params }) {
                         </div>
                       </div>
                     ))}
-                  </Slider>
+                  </Slider> */}
                 </div>
                 {/* <div className="flightResultsSortingPanel">
                   <div className="container-fluid ">
